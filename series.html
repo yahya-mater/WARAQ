@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ابن الصحراء | ورق WARAQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="series.css">
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon"><span>و</span></div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-ar">ورق</span>
+      <span class="nav-logo-en">WARAQ</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#browse">تصفّح</a></li>
+    <li><a href="index.html#schedule">الجدول</a></li>
+    <li><a href="index.html#trending">الأكثر قراءة</a></li>
+    <li><a href="#">للمبدعين</a></li>
+  </ul>
+  <div class="nav-actions">
+    <input class="nav-search" type="text" placeholder="ابحث عن قصة...">
+    <a class="btn btn-outline nav-btn-login" href="#">دخول</a>
+    <a class="btn btn-primary nav-btn-register" href="#">سجّل مجاناً</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="القائمة" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="nav-drawer" id="nav-drawer">
+  <ul class="drawer-links">
+    <li><a href="index.html#browse">تصفّح</a></li>
+    <li><a href="index.html#schedule">الجدول</a></li>
+    <li><a href="index.html#trending">الأكثر قراءة</a></li>
+    <li><a href="#">للمبدعين</a></li>
+  </ul>
+  <input class="drawer-search" type="text" placeholder="ابحث عن قصة...">
+  <div class="drawer-actions">
+    <a class="btn btn-outline" href="#">دخول</a>
+    <a class="btn btn-primary" href="#">سجّل مجاناً</a>
+  </div>
+</div>
+
+
+<!-- ═══ SERIES HERO ═══ -->
+<div class="series-hero">
+  <!-- Blurred BG -->
+  <div class="series-hero-bg">
+    <div class="series-hero-bg-art" id="hero-bg-art"></div>
+  </div>
+
+  <!-- Cover -->
+  <div class="series-cover">
+    <div class="series-cover-art" id="cover-art"></div>
+    <div class="series-cover-actions">
+      <a class="btn btn-primary" href="reader.html">اقرأ الآن</a>
+      <button class="btn btn-outline" id="follow-btn" onclick="toggleFollow()">+ متابعة</button>
+    </div>
+  </div>
+
+  <!-- Info -->
+  <div class="series-info">
+    <div class="series-breadcrumb">
+      <a href="index.html">الرئيسية</a>
+      <span>›</span>
+      <a href="index.html#browse">تصفّح</a>
+      <span>›</span>
+      <span>ابن الصحراء</span>
+    </div>
+
+    <div class="series-genres" id="series-genres"></div>
+    <h1 class="series-title" id="series-title"></h1>
+    <div class="series-author" id="series-author"></div>
+    <div class="series-status" id="series-status"></div>
+
+    <div class="series-stats">
+      <div class="series-stat">
+        <span class="series-stat-val yellow" id="stat-rating"></span>
+        <span class="series-stat-label" id="stat-rating-count"></span>
+      </div>
+      <div class="series-stat">
+        <span class="series-stat-val" id="stat-views"></span>
+        <span class="series-stat-label">مشاهدة</span>
+      </div>
+      <div class="series-stat">
+        <span class="series-stat-val" id="stat-follows"></span>
+        <span class="series-stat-label">متابع</span>
+      </div>
+      <div class="series-stat">
+        <span class="series-stat-val" id="stat-eps"></span>
+        <span class="series-stat-label">فصل</span>
+      </div>
+    </div>
+
+    <p class="series-desc" id="series-desc"></p>
+    <button class="series-desc-toggle" id="desc-toggle">المزيد ▼</button>
+
+    <div class="series-ctas">
+      <a class="btn btn-primary btn-read btn-xl" href="reader.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><polyline points="9 11 12 14 15 11"/></svg>
+        ابدأ من الفصل الأول
+      </a>
+      <a class="btn btn-outline btn-xl" href="reader.html">
+        أكمل — الفصل ٣٨
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ TABS BAR ═══ -->
+<div class="series-tabs-bar">
+  <button class="series-tab active" data-tab="episodes" onclick="switchTab('episodes')">
+    الفصول <span class="tab-count" id="tab-ep-count">٣٨</span>
+  </button>
+  <button class="series-tab" data-tab="characters" onclick="switchTab('characters')">
+    الشخصيات <span class="tab-count">٦</span>
+  </button>
+  <button class="series-tab" data-tab="comments" onclick="switchTab('comments')">
+    تعليقات <span class="tab-count">٦٨</span>
+  </button>
+</div>
+
+
+<!-- ═══ EPISODES PANEL ═══ -->
+<div class="tab-panel active" id="panel-episodes">
+  <div class="episodes-toolbar">
+    <span class="episodes-count" id="episodes-count"></span>
+    <div class="episodes-sort">
+      <button class="sort-btn active" onclick="sortEpisodes(this, false)">الأحدث أولاً</button>
+      <button class="sort-btn" onclick="sortEpisodes(this, true)">الأقدم أولاً</button>
+    </div>
+  </div>
+
+  <div class="episodes-list" id="episodes-list"></div>
+  <button class="load-more-btn" id="load-more-btn" onclick="loadMoreEpisodes()"></button>
+</div>
+
+
+<!-- ═══ CHARACTERS PANEL ═══ -->
+<div class="tab-panel" id="panel-characters">
+  <div class="characters-grid" id="characters-grid"></div>
+</div>
+
+
+<!-- ═══ COMMENTS PANEL ═══ -->
+<div class="tab-panel" id="panel-comments">
+  <div class="comments-header">
+    <div class="comments-count" id="comments-count"></div>
+    <div class="comments-sort-tabs">
+      <button class="c-sort-btn active">الأحدث</button>
+      <button class="c-sort-btn">الأكثر إعجاباً</button>
+    </div>
+  </div>
+
+  <!-- Compose -->
+  <div class="comment-compose">
+    <div class="comment-avatar">أ</div>
+    <div class="comment-input-wrap">
+      <textarea class="comment-textarea" rows="3" placeholder="شاركنا رأيك في القصة..."></textarea>
+      <div class="comment-input-actions">
+        <button class="btn btn-primary" style="font-size:12px;padding:7px 18px">نشر التعليق</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="comments-list" id="comments-list"></div>
+</div>
+
+
+<!-- ═══ RELATED SERIES ═══ -->
+<div class="related-section">
+  <div class="section-header">
+    <h2 class="section-title">قد يعجبك أيضاً</h2>
+    <a class="section-link" href="index.html#browse">عرض الكل ◀</a>
+  </div>
+  <div class="related-grid comics-grid" id="related-grid"></div>
+</div>
+
+
+<!-- ═══ STICKY READ BAR ═══ -->
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar-info">
+    <div class="sticky-bar-cover" id="sticky-cover"></div>
+    <div>
+      <div class="sticky-bar-title" id="sticky-title"></div>
+      <div class="sticky-bar-sub">الفصل ٣٨ — أحدث فصل</div>
+    </div>
+  </div>
+  <div class="sticky-bar-actions">
+    <button class="btn btn-outline" style="font-size:12px" onclick="toggleFollow()">+ متابعة</button>
+    <a class="btn btn-primary" href="reader.html" style="font-size:13px">أكمل القراءة ◀</a>
+  </div>
+</div>
+
+<script src="series.js"></script>
+</body>
+</html>

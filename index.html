@@ -5,575 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ورق | WARAQ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-  <style>
-    /* ─── VARIABLES ─── */
-    :root {
-      --yellow: #FFD100;
-      --yellow-dim: #C9A500;
-      --yellow-glow: rgba(255, 209, 0, 0.18);
-      --black: #0A0A0A;
-      --dark: #111111;
-      --dark2: #181818;
-      --dark3: #222222;
-      --white: #F5F0E8;
-      --gray: #888;
-      --gray2: #555;
-      --ink: #1a1a1a;
-      --radius: 8px;
-      --font-arabic: 'Tajawal', sans-serif;
-      --font-display: 'Bebas Neue', sans-serif;
-    }
-
-    /* ─── RESET ─── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: var(--font-arabic);
-      overflow-x: hidden;
-      cursor: default;
-    }
-
-    /* ─── SCROLLBAR ─── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--dark); }
-    ::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 3px; }
-
-    /* ─── NOISE OVERLAY ─── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.025;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    /* ─── NAV ─── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 1000;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px;
-      height: 64px;
-      background: rgba(10,10,10,0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255,209,0,0.1);
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 12px;
-      text-decoration: none;
-    }
-    .nav-logo-icon {
-      width: 36px; height: 36px;
-      background: var(--yellow);
-      display: flex; align-items: center; justify-content: center;
-      clip-path: polygon(0 0, 85% 0, 100% 15%, 100% 100%, 15% 100%, 0 85%);
-    }
-    .nav-logo-icon span { font-family: var(--font-display); font-size: 18px; color: var(--black); }
-    .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
-    .nav-logo-ar { font-size: 16px; font-weight: 900; color: var(--yellow); letter-spacing: 1px; }
-    .nav-logo-en { font-family: var(--font-display); font-size: 11px; color: var(--gray); letter-spacing: 3px; }
-
-    .nav-links {
-      display: flex; gap: 32px; list-style: none;
-      direction: rtl;
-    }
-    .nav-links a {
-      text-decoration: none; color: var(--white);
-      font-size: 14px; font-weight: 500;
-      position: relative; padding-bottom: 4px;
-      transition: color 0.2s;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute; bottom: 0; right: 0;
-      width: 0; height: 2px;
-      background: var(--yellow);
-      transition: width 0.3s;
-    }
-    .nav-links a:hover { color: var(--yellow); }
-    .nav-links a:hover::after { width: 100%; }
-
-    .nav-actions { display: flex; align-items: center; gap: 12px; }
-    .nav-search {
-      background: var(--dark2);
-      border: 1px solid var(--dark3);
-      border-radius: 20px;
-      padding: 7px 16px;
-      color: var(--white);
-      font-family: var(--font-arabic);
-      font-size: 13px;
-      outline: none;
-      width: 180px;
-      transition: border-color 0.2s, width 0.3s;
-      direction: rtl;
-    }
-    .nav-search:focus { border-color: var(--yellow); width: 220px; }
-    .nav-search::placeholder { color: var(--gray2); }
-
-    .btn {
-      padding: 8px 20px; border-radius: var(--radius);
-      font-family: var(--font-arabic); font-size: 13px; font-weight: 700;
-      cursor: pointer; border: none; text-decoration: none;
-      transition: all 0.2s;
-    }
-    .btn-outline {
-      background: transparent;
-      border: 1.5px solid var(--gray2);
-      color: var(--white);
-    }
-    .btn-outline:hover { border-color: var(--yellow); color: var(--yellow); }
-    .btn-primary {
-      background: var(--yellow);
-      color: var(--black);
-    }
-    .btn-primary:hover { background: #ffe44d; transform: translateY(-1px); }
-
-    /* ─── HERO ─── */
-    .hero {
-      min-height: 100vh;
-      display: grid; grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 120px 80px 80px;
-      position: relative;
-      overflow: hidden;
-      gap: 60px;
-    }
-    .hero::before {
-      content: 'WARAQ';
-      position: absolute;
-      font-family: var(--font-display);
-      font-size: clamp(120px, 20vw, 260px);
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(255,209,0,0.06);
-      bottom: -20px; left: -20px;
-      pointer-events: none;
-      line-height: 1;
-      user-select: none;
-    }
-
-    .hero-content { position: relative; z-index: 2; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--yellow-glow);
-      border: 1px solid rgba(255,209,0,0.3);
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 12px; color: var(--yellow); font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 24px;
-      animation: fadeUp 0.6s ease both;
-    }
-    .hero-badge::before { content: '◆'; font-size: 8px; }
-
-    .hero h1 {
-      font-size: clamp(44px, 6vw, 80px);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 20px;
-      animation: fadeUp 0.6s 0.1s ease both;
-    }
-    .hero h1 span { color: var(--yellow); }
-
-    .hero p {
-      font-size: 16px; color: var(--gray); line-height: 1.8;
-      max-width: 440px;
-      margin-bottom: 36px;
-      animation: fadeUp 0.6s 0.2s ease both;
-      font-weight: 300;
-    }
-    .hero-ctas {
-      display: flex; gap: 12px; flex-wrap: wrap;
-      animation: fadeUp 0.6s 0.3s ease both;
-    }
-    .btn-xl { padding: 14px 32px; font-size: 15px; }
-
-    .hero-stats {
-      display: flex; gap: 36px; margin-top: 52px;
-      animation: fadeUp 0.6s 0.4s ease both;
-    }
-    .hero-stat { display: flex; flex-direction: column; gap: 2px; }
-    .hero-stat-num { font-family: var(--font-display); font-size: 32px; color: var(--yellow); letter-spacing: 1px; }
-    .hero-stat-label { font-size: 12px; color: var(--gray); }
-
-    /* Hero Featured Comic */
-    .hero-visual {
-      position: relative; z-index: 2;
-      display: flex; align-items: center; justify-content: center;
-      animation: fadeUp 0.8s 0.2s ease both;
-    }
-    .hero-comic-stack {
-      position: relative; width: 320px; height: 440px;
-    }
-    .hero-comic-card {
-      position: absolute;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-    }
-    .hero-comic-card.back {
-      width: 260px; height: 360px;
-      top: 40px; right: -30px;
-      transform: rotate(6deg);
-      filter: brightness(0.5);
-    }
-    .hero-comic-card.mid {
-      width: 260px; height: 360px;
-      top: 20px; right: 10px;
-      transform: rotate(2deg);
-      filter: brightness(0.7);
-    }
-    .hero-comic-card.front {
-      width: 280px; height: 390px;
-      top: 0; right: 20px;
-      transform: rotate(-2deg);
-      transition: transform 0.4s;
-    }
-    .hero-comic-card.front:hover { transform: rotate(0deg) scale(1.02); }
-    .comic-cover {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .comic-cover-placeholder {
-      width: 100%; height: 100%;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: flex-end;
-      padding: 20px;
-      background: linear-gradient(160deg, var(--dark3) 0%, #0d0d0d 100%);
-      position: relative;
-      overflow: hidden;
-    }
-    .cover-art {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .cover-art svg { width: 100%; height: 100%; }
-
-    .comic-cover-placeholder .cover-info {
-      position: relative; z-index: 2; text-align: center; width: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
-      padding: 30px 10px 10px;
-    }
-    .cover-title { font-size: 18px; font-weight: 900; color: var(--white); }
-    .cover-genre { font-size: 11px; color: var(--yellow); margin-top: 4px; }
-
-    /* ─── SECTION COMMON ─── */
-    section { padding: 80px 60px; }
-    .section-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 40px;
-    }
-    .section-title {
-      font-size: 28px; font-weight: 900;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .section-title::before {
-      content: '';
-      display: block; width: 4px; height: 28px;
-      background: var(--yellow);
-      border-radius: 2px;
-    }
-    .section-link {
-      color: var(--yellow); text-decoration: none; font-size: 13px; font-weight: 700;
-      display: flex; align-items: center; gap: 6px;
-      opacity: 0.8; transition: opacity 0.2s;
-    }
-    .section-link:hover { opacity: 1; }
-
-    /* ─── GENRE TABS ─── */
-    .genre-tabs {
-      display: flex; gap: 10px; flex-wrap: wrap;
-      margin-bottom: 36px;
-      direction: rtl;
-    }
-    .genre-tab {
-      padding: 8px 20px; border-radius: 20px;
-      font-size: 13px; font-weight: 600; cursor: pointer;
-      border: 1.5px solid var(--dark3);
-      background: transparent; color: var(--gray);
-      font-family: var(--font-arabic);
-      transition: all 0.2s;
-    }
-    .genre-tab:hover { border-color: var(--yellow); color: var(--yellow); }
-    .genre-tab.active {
-      background: var(--yellow); border-color: var(--yellow);
-      color: var(--black);
-    }
-
-    /* ─── COMIC GRID ─── */
-    .comics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 20px;
-    }
-    .comic-card {
-      cursor: pointer;
-      transition: transform 0.25s;
-    }
-    .comic-card:hover { transform: translateY(-6px); }
-    .comic-card-thumb {
-      width: 100%; aspect-ratio: 3/4;
-      border-radius: var(--radius);
-      overflow: hidden;
-      position: relative;
-      background: var(--dark2);
-      margin-bottom: 10px;
-    }
-    .comic-card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .comic-thumb-art {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .comic-badge {
-      position: absolute; top: 8px; right: 8px;
-      background: var(--yellow); color: var(--black);
-      font-size: 9px; font-weight: 900; letter-spacing: 0.5px;
-      padding: 3px 8px; border-radius: 3px;
-    }
-    .comic-badge.new { background: #00e5a0; }
-    .comic-badge.hot { background: #ff4d4d; color: white; }
-    .comic-card-title {
-      font-size: 13px; font-weight: 700; color: var(--white);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .comic-card-meta {
-      font-size: 11px; color: var(--gray); margin-top: 3px;
-      display: flex; align-items: center; gap: 6px;
-    }
-    .comic-rating { color: var(--yellow); }
-
-    /* ─── FEATURED BANNER ─── */
-    .featured-banner {
-      margin: 0 60px 60px;
-      border-radius: 16px;
-      overflow: hidden;
-      background: var(--dark2);
-      display: grid; grid-template-columns: 1fr 300px;
-      min-height: 300px;
-      position: relative;
-    }
-    .featured-banner::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(100deg, rgba(255,209,0,0.08) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .featured-info {
-      padding: 48px;
-      display: flex; flex-direction: column; justify-content: center;
-      position: relative; z-index: 1;
-    }
-    .featured-label {
-      font-size: 11px; color: var(--yellow); font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; margin-bottom: 16px;
-    }
-    .featured-title { font-size: 38px; font-weight: 900; line-height: 1.1; margin-bottom: 12px; }
-    .featured-desc { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 24px; max-width: 460px; font-weight: 300; }
-    .featured-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
-    .tag {
-      background: var(--dark3); color: var(--gray);
-      font-size: 11px; padding: 4px 10px; border-radius: 3px;
-      font-weight: 600;
-    }
-    .featured-visual {
-      background: linear-gradient(135deg, var(--dark3) 0%, var(--dark) 100%);
-      position: relative; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .featured-visual-art { width: 100%; height: 100%; }
-
-    /* ─── TRENDING STRIP ─── */
-    .trending-strip {
-      background: var(--dark);
-      border-top: 1px solid rgba(255,255,255,0.04);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      padding: 20px 60px;
-      display: flex; align-items: center; gap: 20px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .trending-strip::-webkit-scrollbar { display: none; }
-    .trending-label {
-      font-family: var(--font-display); font-size: 18px; color: var(--yellow);
-      white-space: nowrap; letter-spacing: 1px;
-    }
-    .trending-divider { width: 1px; height: 24px; background: var(--dark3); flex-shrink: 0; }
-    .trending-item {
-      display: flex; align-items: center; gap: 10px;
-      white-space: nowrap; cursor: pointer;
-      padding: 6px 14px; border-radius: 20px;
-      border: 1px solid var(--dark3);
-      transition: all 0.2s; flex-shrink: 0;
-    }
-    .trending-item:hover { border-color: var(--yellow); color: var(--yellow); }
-    .trending-rank { font-family: var(--font-display); font-size: 20px; color: var(--yellow); min-width: 24px; }
-    .trending-info { display: flex; flex-direction: column; }
-    .trending-name { font-size: 12px; font-weight: 700; }
-    .trending-cat { font-size: 10px; color: var(--gray); }
-
-    /* ─── SCHEDULE ─── */
-    .schedule-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
-    }
-    .schedule-day { display: flex; flex-direction: column; gap: 8px; }
-    .schedule-day-name {
-      text-align: center; font-size: 11px; font-weight: 700;
-      color: var(--gray); padding-bottom: 8px;
-      border-bottom: 2px solid var(--dark3);
-    }
-    .schedule-day-name.today { color: var(--yellow); border-color: var(--yellow); }
-    .schedule-comic-mini {
-      border-radius: 6px;
-      overflow: hidden; aspect-ratio: 3/4;
-      background: var(--dark2);
-      cursor: pointer; transition: transform 0.2s;
-      position: relative;
-    }
-    .schedule-comic-mini:hover { transform: scale(1.05); }
-    .schedule-comic-mini .s-art { width: 100%; height: 100%; }
-    .schedule-comic-mini .s-title {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 4px 5px;
-      background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
-      font-size: 9px; font-weight: 700; color: var(--white);
-    }
-
-    /* ─── FOOTER ─── */
-    footer {
-      background: var(--dark);
-      border-top: 1px solid rgba(255,255,255,0.05);
-      padding: 60px;
-    }
-    .footer-top {
-      display: grid; grid-template-columns: 260px 1fr;
-      gap: 80px; margin-bottom: 48px;
-    }
-    .footer-brand p {
-      font-size: 13px; color: var(--gray); line-height: 1.8; margin-top: 16px;
-      font-weight: 300;
-    }
-    .footer-links-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
-    }
-    .footer-col h4 { font-size: 13px; font-weight: 700; color: var(--yellow); margin-bottom: 16px; letter-spacing: 0.5px; }
-    .footer-col a {
-      display: block; text-decoration: none; color: var(--gray);
-      font-size: 13px; margin-bottom: 10px; transition: color 0.2s;
-      font-weight: 300;
-    }
-    .footer-col a:hover { color: var(--white); }
-    .footer-bottom {
-      display: flex; align-items: center; justify-content: space-between;
-      padding-top: 28px; border-top: 1px solid var(--dark3);
-      font-size: 12px; color: var(--gray2);
-    }
-    .footer-socials { display: flex; gap: 12px; }
-    .social-btn {
-      width: 34px; height: 34px; border-radius: 50%;
-      border: 1px solid var(--dark3);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--gray); text-decoration: none;
-      font-size: 13px; transition: all 0.2s;
-    }
-    .social-btn:hover { border-color: var(--yellow); color: var(--yellow); }
-
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .reveal {
-      opacity: 0; transform: translateY(30px);
-      transition: opacity 0.6s, transform 0.6s;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ─── MODAL ─── */
-    .modal-overlay {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(8px);
-      z-index: 2000;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.3s;
-    }
-    .modal-overlay.open { opacity: 1; pointer-events: all; }
-    .modal {
-      background: var(--dark2);
-      border: 1px solid rgba(255,209,0,0.15);
-      border-radius: 16px;
-      width: 90%; max-width: 600px;
-      max-height: 90vh; overflow-y: auto;
-      transform: scale(0.95) translateY(20px);
-      transition: transform 0.3s;
-      scrollbar-width: thin;
-      scrollbar-color: var(--yellow) var(--dark);
-    }
-    .modal-overlay.open .modal { transform: scale(1) translateY(0); }
-    .modal-cover {
-      height: 220px; position: relative; overflow: hidden;
-      border-radius: 16px 16px 0 0;
-      background: var(--dark3);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .modal-cover svg { height: 100%; width: auto; }
-    .modal-close {
-      position: absolute; top: 14px; left: 14px;
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(0,0,0,0.6); border: none;
-      color: var(--white); font-size: 18px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s;
-    }
-    .modal-close:hover { background: rgba(255,209,0,0.2); color: var(--yellow); }
-    .modal-body { padding: 28px 32px; }
-    .modal-genre { font-size: 11px; color: var(--yellow); font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; }
-    .modal-title { font-size: 26px; font-weight: 900; margin-bottom: 4px; }
-    .modal-author { font-size: 13px; color: var(--gray); margin-bottom: 16px; }
-    .modal-desc { font-size: 14px; color: #aaa; line-height: 1.85; margin-bottom: 24px; font-weight: 300; }
-    .modal-actions { display: flex; gap: 10px; }
-    .episode-list { margin-top: 28px; border-top: 1px solid var(--dark3); padding-top: 20px; }
-    .episode-list h4 { font-size: 14px; font-weight: 700; margin-bottom: 14px; }
-    .episode-item {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
-      cursor: pointer; transition: color 0.2s;
-    }
-    .episode-item:hover .ep-title { color: var(--yellow); }
-    .ep-title { font-size: 13px; font-weight: 600; }
-    .ep-meta { font-size: 11px; color: var(--gray); display: flex; gap: 12px; align-items: center; }
-    .ep-new { font-size: 10px; background: var(--yellow); color: var(--black); padding: 2px 7px; border-radius: 3px; font-weight: 700; }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; }
-      .hero-visual { order: -1; }
-      .hero-comic-stack { width: 220px; height: 300px; }
-      .hero-comic-card.front { width: 200px; height: 280px; }
-      .hero-comic-card.mid, .hero-comic-card.back { width: 190px; height: 260px; }
-      section { padding: 60px 24px; }
-      .featured-banner { margin: 0 24px 40px; grid-template-columns: 1fr; }
-      .featured-visual { height: 200px; }
-      .featured-info { padding: 28px; }
-      .schedule-grid { grid-template-columns: repeat(3, 1fr); }
-      .footer-top { grid-template-columns: 1fr; gap: 40px; }
-      .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
-      .trending-strip { padding: 16px 24px; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ═══ NAV ═══ -->
+<!-- ═══ NAVIGATION ═══ -->
 <nav>
   <a class="nav-logo" href="#">
     <div class="nav-logo-icon"><span>و</span></div>
@@ -582,18 +19,39 @@
       <span class="nav-logo-en">WARAQ</span>
     </div>
   </a>
+
   <ul class="nav-links">
     <li><a href="#browse">تصفّح</a></li>
     <li><a href="#schedule">الجدول</a></li>
     <li><a href="#trending">الأكثر قراءة</a></li>
     <li><a href="#creators">للمبدعين</a></li>
   </ul>
+
   <div class="nav-actions">
     <input class="nav-search" type="text" placeholder="ابحث عن قصة...">
+    <a class="btn btn-outline nav-btn-login" href="#">دخول</a>
+    <a class="btn btn-primary nav-btn-register" href="#">سجّل مجاناً</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="القائمة" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="القائمة الرئيسية">
+  <ul class="drawer-links">
+    <li><a href="#browse">تصفّح</a></li>
+    <li><a href="#schedule">الجدول</a></li>
+    <li><a href="#trending">الأكثر قراءة</a></li>
+    <li><a href="#creators">للمبدعين</a></li>
+  </ul>
+  <input class="drawer-search" type="text" placeholder="ابحث عن قصة...">
+  <div class="drawer-actions">
     <a class="btn btn-outline" href="#">دخول</a>
     <a class="btn btn-primary" href="#">سجّل مجاناً</a>
   </div>
-</nav>
+</div>
+
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="home">
@@ -620,20 +78,34 @@
       </div>
     </div>
   </div>
+
   <div class="hero-visual">
     <div class="hero-comic-stack">
       <div class="hero-comic-card back">
-        <div class="comic-cover-placeholder" style="background: linear-gradient(135deg,#1a1a2e,#16213e)">
-          <div class="cover-art"><!-- bg card art --><svg viewBox="0 0 260 360" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="g1" cx="50%" cy="30%" r="60%"><stop offset="0%" stop-color="#FFD100" stop-opacity="0.3"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs><rect width="260" height="360" fill="#16213e"/><ellipse cx="130" cy="100" rx="90" ry="90" fill="url(#g1)"/><rect x="60" y="200" width="140" height="2" fill="#FFD100" opacity="0.3"/><rect x="80" y="220" width="100" height="2" fill="#FFD100" opacity="0.15"/></svg></div>
+        <div class="comic-cover-placeholder" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">
+          <div class="cover-art">
+            <svg viewBox="0 0 260 360" xmlns="http://www.w3.org/2000/svg">
+              <defs><radialGradient id="g1" cx="50%" cy="30%" r="60%"><stop offset="0%" stop-color="#FFD100" stop-opacity="0.3"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+              <rect width="260" height="360" fill="#16213e"/>
+              <ellipse cx="130" cy="100" rx="90" ry="90" fill="url(#g1)"/>
+            </svg>
+          </div>
         </div>
       </div>
       <div class="hero-comic-card mid">
-        <div class="comic-cover-placeholder" style="background: linear-gradient(135deg,#1a2a1a,#0d1f0d)">
-          <div class="cover-art"><svg viewBox="0 0 260 360" xmlns="http://www.w3.org/2000/svg"><rect width="260" height="360" fill="#0d1f0d"/><circle cx="130" cy="160" r="80" fill="none" stroke="#00e5a0" stroke-width="1" opacity="0.4"/><circle cx="130" cy="160" r="50" fill="none" stroke="#00e5a0" stroke-width="1" opacity="0.2"/><circle cx="130" cy="160" r="20" fill="#00e5a0" opacity="0.3"/></svg></div>
+        <div class="comic-cover-placeholder" style="background:linear-gradient(135deg,#1a2a1a,#0d1f0d)">
+          <div class="cover-art">
+            <svg viewBox="0 0 260 360" xmlns="http://www.w3.org/2000/svg">
+              <rect width="260" height="360" fill="#0d1f0d"/>
+              <circle cx="130" cy="160" r="80" fill="none" stroke="#00e5a0" stroke-width="1" opacity="0.4"/>
+              <circle cx="130" cy="160" r="50" fill="none" stroke="#00e5a0" stroke-width="1" opacity="0.2"/>
+              <circle cx="130" cy="160" r="20" fill="#00e5a0" opacity="0.3"/>
+            </svg>
+          </div>
         </div>
       </div>
-      <div class="hero-comic-card front" onclick="openModal(0)">
-        <div class="comic-cover-placeholder" style="background: linear-gradient(150deg,#1a0a00,#2d1600)">
+      <div class="hero-comic-card front" onclick="window.location.href='series.html'" role="button" tabindex="0" aria-label="افتح ابن الصحراء">
+        <div class="comic-cover-placeholder" style="background:linear-gradient(150deg,#1a0a00,#2d1600)">
           <div class="cover-art">
             <svg viewBox="0 0 280 390" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -648,12 +120,10 @@
               </defs>
               <rect width="280" height="390" fill="#1a0a00"/>
               <ellipse cx="140" cy="150" rx="110" ry="110" fill="url(#heroGlow)"/>
-              <!-- stylized figure silhouette -->
               <ellipse cx="140" cy="100" rx="28" ry="32" fill="#FFD100" opacity="0.9"/>
               <path d="M100 180 Q140 160 180 180 L190 280 L90 280 Z" fill="#FFD100" opacity="0.8"/>
               <path d="M100 180 L75 240 L95 245 L110 200Z" fill="#FFD100" opacity="0.7"/>
               <path d="M180 180 L205 240 L185 245 L170 200Z" fill="#FFD100" opacity="0.7"/>
-              <!-- cloak/cape -->
               <path d="M90 200 Q60 300 50 380 L150 360 Q100 280 120 200Z" fill="#c89900" opacity="0.6"/>
               <path d="M170 200 Q200 300 210 380 L130 360 Q160 280 160 200Z" fill="#c89900" opacity="0.6"/>
               <rect width="280" height="390" fill="url(#heroFade)"/>
@@ -669,17 +139,19 @@
   </div>
 </section>
 
+
 <!-- ═══ TRENDING STRIP ═══ -->
 <div class="trending-strip" id="trending">
   <span class="trending-label">الأكثر قراءة</span>
   <div class="trending-divider"></div>
-  <div class="trending-item" onclick="openModal(0)"><span class="trending-rank">١</span><div class="trending-info"><span class="trending-name">ابن الصحراء</span><span class="trending-cat">فانتازيا</span></div></div>
-  <div class="trending-item" onclick="openModal(1)"><span class="trending-rank">٢</span><div class="trending-info"><span class="trending-name">أسرار المدينة</span><span class="trending-cat">غموض</span></div></div>
-  <div class="trending-item" onclick="openModal(2)"><span class="trending-rank">٣</span><div class="trending-info"><span class="trending-name">حارسة الجن</span><span class="trending-cat">خيال علمي</span></div></div>
-  <div class="trending-item" onclick="openModal(3)"><span class="trending-rank">٤</span><div class="trending-info"><span class="trending-name">الملاك الأخير</span><span class="trending-cat">أكشن</span></div></div>
-  <div class="trending-item" onclick="openModal(4)"><span class="trending-rank">٥</span><div class="trending-info"><span class="trending-name">قلب من حجر</span><span class="trending-cat">رومانسية</span></div></div>
-  <div class="trending-item" onclick="openModal(5)"><span class="trending-rank">٦</span><div class="trending-info"><span class="trending-name">ليلى والقمرين</span><span class="trending-cat">درامية</span></div></div>
+  <div class="trending-item" onclick="window.location.href='series.html'"><span class="trending-rank">١</span><div class="trending-info"><span class="trending-name">ابن الصحراء</span><span class="trending-cat">فانتازيا</span></div></div>
+  <div class="trending-item" onclick="window.location.href='series.html'"><span class="trending-rank">٢</span><div class="trending-info"><span class="trending-name">أسرار المدينة</span><span class="trending-cat">غموض</span></div></div>
+  <div class="trending-item" onclick="window.location.href='series.html'"><span class="trending-rank">٣</span><div class="trending-info"><span class="trending-name">حارسة الجن</span><span class="trending-cat">خيال علمي</span></div></div>
+  <div class="trending-item" onclick="window.location.href='series.html'"><span class="trending-rank">٤</span><div class="trending-info"><span class="trending-name">الملاك الأخير</span><span class="trending-cat">أكشن</span></div></div>
+  <div class="trending-item" onclick="window.location.href='series.html'"><span class="trending-rank">٥</span><div class="trending-info"><span class="trending-name">قلب من حجر</span><span class="trending-cat">رومانسية</span></div></div>
+  <div class="trending-item" onclick="window.location.href='series.html'"><span class="trending-rank">٦</span><div class="trending-info"><span class="trending-name">ليلى والقمرين</span><span class="trending-cat">درامية</span></div></div>
 </div>
+
 
 <!-- ═══ FEATURED BANNER ═══ -->
 <div class="featured-banner reveal">
@@ -692,9 +164,9 @@
       <span class="tag">مغامرة</span>
       <span class="tag">تاريخي</span>
     </div>
-    <div style="display:flex;gap:10px;">
-      <a class="btn btn-primary" onclick="openModal(1)" style="cursor:pointer">اقرأ الآن</a>
-      <a class="btn btn-outline" style="cursor:pointer">إضافة للمفضّلة ♡</a>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="window.location.href='series.html'">اقرأ الآن</button>
+      <button class="btn btn-outline">إضافة للمفضّلة ♡</button>
     </div>
   </div>
   <div class="featured-visual">
@@ -707,29 +179,26 @@
       </defs>
       <rect width="300" height="300" fill="#0f0f1a"/>
       <ellipse cx="150" cy="150" rx="120" ry="120" fill="url(#fGlow)"/>
-      <!-- city silhouette -->
-      <rect x="20" y="160" width="20" height="140" fill="#FFD100" opacity="0.15"/>
-      <rect x="50" y="130" width="30" height="170" fill="#FFD100" opacity="0.2"/>
-      <rect x="90" y="150" width="25" height="150" fill="#FFD100" opacity="0.15"/>
+      <rect x="20"  y="160" width="20" height="140" fill="#FFD100" opacity="0.15"/>
+      <rect x="50"  y="130" width="30" height="170" fill="#FFD100" opacity="0.2"/>
+      <rect x="90"  y="150" width="25" height="150" fill="#FFD100" opacity="0.15"/>
       <rect x="130" y="110" width="40" height="190" fill="#FFD100" opacity="0.25"/>
       <rect x="180" y="140" width="30" height="160" fill="#FFD100" opacity="0.18"/>
       <rect x="220" y="120" width="35" height="180" fill="#FFD100" opacity="0.2"/>
       <rect x="265" y="155" width="25" height="145" fill="#FFD100" opacity="0.15"/>
-      <!-- windows glow -->
-      <rect x="57" y="145" width="6" height="8" fill="#FFD100" opacity="0.7" rx="1"/>
-      <rect x="67" y="145" width="6" height="8" fill="#FFD100" opacity="0.4" rx="1"/>
-      <rect x="57" y="160" width="6" height="8" fill="#FFD100" opacity="0.5" rx="1"/>
-      <rect x="137" y="125" width="8" height="10" fill="#FFD100" opacity="0.8" rx="1"/>
-      <rect x="150" y="125" width="8" height="10" fill="#FFD100" opacity="0.5" rx="1"/>
-      <rect x="137" y="142" width="8" height="10" fill="#FFD100" opacity="0.6" rx="1"/>
-      <!-- moon -->
+      <rect x="57"  y="145" width="6"  height="8"  fill="#FFD100" opacity="0.7" rx="1"/>
+      <rect x="67"  y="145" width="6"  height="8"  fill="#FFD100" opacity="0.4" rx="1"/>
+      <rect x="57"  y="160" width="6"  height="8"  fill="#FFD100" opacity="0.5" rx="1"/>
+      <rect x="137" y="125" width="8"  height="10" fill="#FFD100" opacity="0.8" rx="1"/>
+      <rect x="150" y="125" width="8"  height="10" fill="#FFD100" opacity="0.5" rx="1"/>
+      <rect x="137" y="142" width="8"  height="10" fill="#FFD100" opacity="0.6" rx="1"/>
       <circle cx="240" cy="60" r="28" fill="#FFD100" opacity="0.9"/>
       <circle cx="250" cy="52" r="22" fill="#0f0f1a"/>
-      <!-- fog base -->
       <rect x="0" y="240" width="300" height="60" fill="#0f0f1a" opacity="0.7"/>
     </svg>
   </div>
 </div>
+
 
 <!-- ═══ BROWSE ═══ -->
 <section id="browse">
@@ -737,7 +206,6 @@
     <h2 class="section-title">تصفّح العناوين</h2>
     <a class="section-link" href="#">عرض الكل ◀</a>
   </div>
-
   <div class="genre-tabs reveal">
     <button class="genre-tab active" onclick="filterGenre(this,'all')">الكل</button>
     <button class="genre-tab" onclick="filterGenre(this,'fantasy')">فانتازيا</button>
@@ -748,12 +216,12 @@
     <button class="genre-tab" onclick="filterGenre(this,'drama')">درامية</button>
     <button class="genre-tab" onclick="filterGenre(this,'horror')">رعب</button>
   </div>
-
   <div class="comics-grid" id="comics-grid"></div>
 </section>
 
+
 <!-- ═══ SCHEDULE ═══ -->
-<section id="schedule" style="background: var(--dark);">
+<section id="schedule" style="background:var(--dark)">
   <div class="section-header reveal">
     <h2 class="section-title">جدول التحديثات</h2>
     <span style="font-size:13px;color:var(--gray)">يتجدد كل يوم</span>
@@ -761,11 +229,12 @@
   <div class="schedule-grid reveal" id="schedule-grid"></div>
 </section>
 
+
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <a class="nav-logo" href="#" style="display:inline-flex">
+      <a class="nav-logo" href="#">
         <div class="nav-logo-icon"><span>و</span></div>
         <div class="nav-logo-text">
           <span class="nav-logo-ar">ورق</span>
@@ -801,19 +270,20 @@
   <div class="footer-bottom">
     <span>© 2025 ورق – WARAQ. جميع الحقوق محفوظة.</span>
     <div class="footer-socials">
-      <a class="social-btn" href="#">𝕏</a>
-      <a class="social-btn" href="#">in</a>
-      <a class="social-btn" href="#">▶</a>
-      <a class="social-btn" href="#">📷</a>
+      <a class="social-btn" href="#" aria-label="تويتر">𝕏</a>
+      <a class="social-btn" href="#" aria-label="لينكدإن">in</a>
+      <a class="social-btn" href="#" aria-label="يوتيوب">▶</a>
+      <a class="social-btn" href="#" aria-label="إنستغرام">◉</a>
     </div>
   </div>
 </footer>
 
+
 <!-- ═══ MODAL ═══ -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)" role="dialog" aria-modal="true" tabindex="-1">
   <div class="modal" id="modal">
     <div class="modal-cover" id="modal-cover">
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <button class="modal-close" onclick="closeModal()" aria-label="إغلاق">✕</button>
     </div>
     <div class="modal-body">
       <div class="modal-genre" id="modal-genre"></div>
@@ -821,275 +291,14 @@
       <div class="modal-author" id="modal-author"></div>
       <div class="modal-desc" id="modal-desc"></div>
       <div class="modal-actions">
-        <a class="btn btn-primary">اقرأ الفصل الأول</a>
-        <a class="btn btn-outline">متابعة ♡</a>
+        <button class="btn btn-primary">اقرأ الفصل الأول</button>
+        <button class="btn btn-outline">متابعة ♡</button>
       </div>
       <div class="episode-list" id="modal-episodes"></div>
     </div>
   </div>
 </div>
 
-<script>
-// ── DATA ──
-const comics = [
-  {
-    title: 'ابن الصحراء',
-    author: 'رسم: ماجد الحربي | قصة: نورة العتيبي',
-    genre: 'فانتازيا · مغامرة',
-    genreKey: 'fantasy',
-    desc: 'يتيم تربّته الرمال والنجوم، يكتشف أن في عروقه دم ملوك منسيّين. رحلة تتجاوز الحدود والخرافات في قلب صحراء لا ترحم، وعدوّ لا وجه له.',
-    badge: 'رائج',
-    badgeClass: 'hot',
-    rating: '٤.٩',
-    episodes: 38,
-    color: ['#1a0a00','#2d1600'],
-    svgFill: '#FFD100',
-    svgType: 'hero'
-  },
-  {
-    title: 'أسرار المدينة',
-    author: 'رسم وقصة: شيماء القاضي',
-    genre: 'غموض · مغامرة',
-    genreKey: 'mystery',
-    desc: 'في أعماق مدينة تحت الأرض توقّف فيها الزمن، تحاول المحققة جبر كشف سرّ اختفاء مدينة كاملة قبل أن تتكرر المأساة.',
-    badge: 'مميّز',
-    badgeClass: '',
-    rating: '٤.٨',
-    episodes: 52,
-    color: ['#0f0f1a','#1a1a2e'],
-    svgFill: '#a78bfa',
-    svgType: 'city'
-  },
-  {
-    title: 'حارسة الجن',
-    author: 'رسم: أحمد زكريا | قصة: لمى الشمري',
-    genre: 'خيال علمي · أكشن',
-    genreKey: 'scifi',
-    desc: 'في عالم يُكبّل فيه الجن بشرائح رقمية، تقاتل حارسة الطائفة الأخيرة لاستعادة ذاكرة شعبها — ولو كلّفها كل شيء.',
-    badge: 'جديد',
-    badgeClass: 'new',
-    rating: '٤.٧',
-    episodes: 12,
-    color: ['#001a0a','#003d1a'],
-    svgFill: '#00e5a0',
-    svgType: 'circle'
-  },
-  {
-    title: 'الملاك الأخير',
-    author: 'رسم وقصة: كريم منصور',
-    genre: 'أكشن · خيال',
-    genreKey: 'action',
-    desc: 'آخر الملائكة المحاربين يهبط إلى أرض خرّبها الفساد. معركة لا تنتهي بين الخير المُتعب والشر الذي لا يعرف الكلل.',
-    badge: 'رائج',
-    badgeClass: 'hot',
-    rating: '٤.٦',
-    episodes: 65,
-    color: ['#1a0a0a','#2d0000'],
-    svgFill: '#ff6b6b',
-    svgType: 'wing'
-  },
-  {
-    title: 'قلب من حجر',
-    author: 'رسم: هالة نور | قصة: رنا الطاهر',
-    genre: 'رومانسية · دراما',
-    genreKey: 'romance',
-    desc: 'بين طالبة نحت تعشق الصخر ومعماري يبني جدراناً حول قلبه — حب ينمو في صمت المراسم ويتشكّل مثل الطين.',
-    badge: '',
-    badgeClass: '',
-    rating: '٤.٥',
-    episodes: 29,
-    color: ['#1a0010','#2d0020'],
-    svgFill: '#f472b6',
-    svgType: 'heart'
-  },
-  {
-    title: 'ليلى والقمرين',
-    author: 'رسم: سلمى إبراهيم | قصة: داليا فريد',
-    genre: 'درامية · خيال',
-    genreKey: 'drama',
-    desc: 'فتاة تولد بين قمرين تتجاذبها قوتان لا تعرف لأيهما تنتمي. قصة هوية وانتماء في مجتمع يطلب منك أن تختار.',
-    badge: 'جديد',
-    badgeClass: 'new',
-    rating: '٤.8',
-    episodes: 8,
-    color: ['#0a001a','#150030'],
-    svgFill: '#c084fc',
-    svgType: 'moon'
-  },
-  {
-    title: 'الظل السابع',
-    author: 'رسم: يوسف الحداد',
-    genre: 'رعب · غموض',
-    genreKey: 'horror',
-    desc: 'سبعة أشخاص في مبنى مهجور يكتشفون أن ظلالهم تتصرف بإرادة مستقلة. من هو الحقيقي؟ ومن هو الظل؟',
-    badge: '',
-    badgeClass: '',
-    rating: '٤.٤',
-    episodes: 20,
-    color: ['#050505','#111111'],
-    svgFill: '#6b7280',
-    svgType: 'shadow'
-  },
-  {
-    title: 'ثورة الآلات',
-    author: 'رسم وقصة: طارق العمري',
-    genre: 'خيال علمي · أكشن',
-    genreKey: 'scifi',
-    desc: 'في عام ٢٠٩٠، الآلات لا تنام ولا تتعب. البشر الأخيرون يتحصّنون خلف جدران الذاكرة القديمة — ذاكرة ما كانوا يوماً.',
-    badge: '',
-    badgeClass: '',
-    rating: '٤.٣',
-    episodes: 33,
-    color: ['#001015','#002030'],
-    svgFill: '#38bdf8',
-    svgType: 'tech'
-  },
-  {
-    title: 'بنت النيل',
-    author: 'رسم: مريم الجوهري | قصة: إيمان سعد',
-    genre: 'تاريخي · مغامرة',
-    genreKey: 'fantasy',
-    desc: 'كاهنة معبد آمون تكشف مؤامرة تهدد عرش مصر. تتسلح بالمعرفة وحدها في عصر يرى المرأة ديكوراً لا سلاحاً.',
-    badge: 'مميّز',
-    badgeClass: '',
-    rating: '٤.٩',
-    episodes: 44,
-    color: ['#1a1000','#2d1c00'],
-    svgFill: '#fbbf24',
-    svgType: 'pharaoh'
-  },
-  {
-    title: 'وادي الوحوش',
-    author: 'رسم وقصة: سامر المالكي',
-    genre: 'مغامرة · فانتازيا',
-    genreKey: 'action',
-    desc: 'وادٍ لا تنتهي حدوده، مسكون بمخلوقات تأكل الأحلام. صبي فقد ذاكرته يجد أن جميع الوحوش تعرفه باسمه.',
-    badge: '',
-    badgeClass: '',
-    rating: '٤.٦',
-    episodes: 27,
-    color: ['#0a1a00','#112200'],
-    svgFill: '#84cc16',
-    svgType: 'forest'
-  }
-];
-
-// ── SVG COVERS ──
-function svgCover(type, fill, color) {
-  const bg = `linear-gradient(150deg,${color[0]},${color[1]})`;
-  const svgs = {
-    hero: `<svg viewBox="0 0 160 213" xmlns="http://www.w3.org/2000/svg"><rect width="160" height="213" fill="${color[0]}"/><ellipse cx="80" cy="70" rx="60" ry="60" fill="${fill}" opacity="0.2"/><ellipse cx="80" cy="55" rx="16" ry="18" fill="${fill}" opacity="0.9"/><path d="M55 100 Q80 88 105 100 L110 160 L50 160 Z" fill="${fill}" opacity="0.8"/><path d="M55 100 L38 140 L55 144 L66 110Z" fill="${fill}" opacity="0.7"/><path d="M105 100 L122 140 L105 144 L94 110Z" fill="${fill}" opacity="0.7"/></svg>`,
-    city: `<svg viewBox="0 0 160 213" xmlns="http://www.w3.org/2000/svg"><rect width="160" height="213" fill="${color[0]}"/><rect x="10" y="100" width="12" height="113" fill="${fill}" opacity="0.15"/><rect x="28" y="80" width="18" height="133" fill="${fill}" opacity="0.2"/><rect x="52" y="95" width="15" height="118" fill="${fill}" opacity="0.15"/><rect x="73" y="65" width="22" height="148" fill="${fill}" opacity="0.25"/><rect x="101" y="85" width="17" height="128" fill="${fill}" opacity="0.18"/><rect x="124" y="70" width="22" height="143" fill="${fill}" opacity="0.2"/><circle cx="130" cy="30" r="16" fill="${fill}" opacity="0.85"/><circle cx="138" cy="24" r="12" fill="${color[0]}"/></svg>`,
-    circle: `<svg viewBox="0 0 160 213" xmlns="http://www.w3.org/2000/svg"><rect width="160" height="213" fill="${color[0]}"/><circle cx="80" cy="100" r="55" fill="none" stroke="${fill}" stroke-width="1.5" opacity="0.5"/><circle cx="80" cy="100" r="35" fill="none" stroke="${fill}" stroke-width="1" opacity="0.3"/><circle cx="80" cy="100" r="15" fill="${fill}" opacity="0.4"/><line x1="80" y1="0" x2="80" y2="213" stroke="${fill}" stroke-width="0.5" opacity="0.2"/><line x1="0" y1="100" x2="160" y2="100" stroke="${fill}" stroke-width="0.5" opacity="0.2"/></svg>`,
-    wing: `<svg viewBox="0 0 160 213" xmlns="http://www.w3.org/2000/svg"><rect width="160" height="213" fill="${color[0]}"/><path d="M80 70 Q20 90 10 150 Q40 130 80 140 Q120 130 150 150 Q140 90 80 70Z" fill="${fill}" opacity="0.6"/><path d="M80 70 Q20 60 5 30 Q30 80 80 90Z" fill="${fill}" opacity="0.4"/><path d="M80 70 Q140 60 155 30 Q130 80 80 90Z" fill="${fill}" opacity="0.4"/><ellipse cx="80" cy="110" rx="12" ry="14" fill="${fill}" opacity="0.9"/></svg>`,
-    heart: `<svg viewBox="0 0 160 213" xmlns="http://www.w3.org/2000/svg"><rect width="160" height="213" fill="${color[0]}"/><path d="M80 120 Q30 90 30 60 Q30 30 55 30 Q70 30 80 45 Q90 30 105 30 Q130 30 130 60 Q130 90 80 120Z" fill="${fill}" opacity="0.7"/></svg>`,
-    moon: `<svg viewBox="0 0 160 213" xmlns="http://www.w3.org/2000/svg"><rect width="160" height="213" fill="${color[0]}"/><circle cx="60" cy="80" r="40" fill="${fill}" opacity="0.8"/><circle cx="85" cy="70" r="35" fill="${color[0]}"/><circle cx="110" cy="90" r="30" fill="${fill}" opacity="0.5"/><circle cx="125" cy="82" r="26" fill="${color[0]}"/></svg>`,
-    shadow: `<svg viewBox="0 0 160 213" xmlns="http://www.w3.org/2000/svg"><rect width="160" height="213" fill="${color[0]}"/><ellipse cx="80" cy="80" rx="30" ry="34" fill="${fill}" opacity="0.5"/><ellipse cx="80" cy="80" rx="20" ry="22" fill="${fill}" opacity="0.8"/><path d="M60 110 Q80 100 100 110 L95 160 L65 160Z" fill="${fill}" opacity="0.5"/><ellipse cx="110" cy="100" rx="20" ry="22" fill="${fill}" opacity="0.2"/></svg>`,
-    tech: `<svg viewBox="0 0 160 213" xmlns="http://www.w3.org/2000/svg"><rect width="160" height="213" fill="${color[0]}"/><rect x="50" y="40" width="60" height="80" fill="none" stroke="${fill}" stroke-width="1.5" opacity="0.7" rx="4"/><line x1="50" y1="65" x2="110" y2="65" stroke="${fill}" stroke-width="0.5" opacity="0.4"/><line x1="50" y1="85" x2="110" y2="85" stroke="${fill}" stroke-width="0.5" opacity="0.4"/><circle cx="65" cy="55" r="5" fill="${fill}" opacity="0.8"/><circle cx="80" cy="55" r="5" fill="${fill}" opacity="0.5"/><circle cx="95" cy="55" r="5" fill="${fill}" opacity="0.3"/><line x1="80" y1="120" x2="80" y2="150" stroke="${fill}" stroke-width="1.5" opacity="0.5"/><rect x="60" y="150" width="40" height="8" fill="${fill}" opacity="0.4" rx="2"/></svg>`,
-    pharaoh: `<svg viewBox="0 0 160 213" xmlns="http://www.w3.org/2000/svg"><rect width="160" height="213" fill="${color[0]}"/><polygon points="80,20 95,60 135,60 105,82 118,122 80,100 42,122 55,82 25,60 65,60" fill="${fill}" opacity="0.7"/><rect x="65" y="110" width="30" height="50" fill="${fill}" opacity="0.5"/><rect x="55" y="155" width="50" height="10" fill="${fill}" opacity="0.4" rx="2"/></svg>`,
-    forest: `<svg viewBox="0 0 160 213" xmlns="http://www.w3.org/2000/svg"><rect width="160" height="213" fill="${color[0]}"/><polygon points="80,20 110,80 50,80" fill="${fill}" opacity="0.6"/><polygon points="80,50 120,120 40,120" fill="${fill}" opacity="0.5"/><polygon points="80,80 125,160 35,160" fill="${fill}" opacity="0.4"/><rect x="72" y="160" width="16" height="40" fill="${fill}" opacity="0.5"/></svg>`
-  };
-  return svgs[type] || svgs.circle;
-}
-
-// ── RENDER COMICS ──
-let currentFilter = 'all';
-function renderComics(filter) {
-  currentFilter = filter;
-  const grid = document.getElementById('comics-grid');
-  grid.innerHTML = '';
-  comics.forEach((c, i) => {
-    if (filter !== 'all' && c.genreKey !== filter) return;
-    const card = document.createElement('div');
-    card.className = 'comic-card';
-    card.onclick = () => openModal(i);
-    card.innerHTML = `
-      <div class="comic-card-thumb">
-        <div class="comic-thumb-art">${svgCover(c.svgType, c.svgFill, c.color)}</div>
-        ${c.badge ? `<span class="comic-badge ${c.badgeClass}">${c.badge}</span>` : ''}
-      </div>
-      <div class="comic-card-title">${c.title}</div>
-      <div class="comic-card-meta">
-        <span class="comic-rating">★ ${c.rating}</span>
-        <span>${c.episodes} فصل</span>
-      </div>`;
-    grid.appendChild(card);
-  });
-}
-
-function filterGenre(btn, genre) {
-  document.querySelectorAll('.genre-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderComics(genre);
-}
-
-// ── SCHEDULE ──
-const days = ['الجمعة','السبت','الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس'];
-const todayIdx = 1; // Saturday as "today"
-function renderSchedule() {
-  const grid = document.getElementById('schedule-grid');
-  days.forEach((day, di) => {
-    const col = document.createElement('div');
-    col.className = 'schedule-day';
-    const nameEl = document.createElement('div');
-    nameEl.className = 'schedule-day-name' + (di === todayIdx ? ' today' : '');
-    nameEl.textContent = day;
-    col.appendChild(nameEl);
-    const dayComics = comics.filter((_, i) => i % 7 === di).slice(0, 3);
-    dayComics.forEach((c, ci) => {
-      const origIdx = comics.indexOf(c);
-      const mini = document.createElement('div');
-      mini.className = 'schedule-comic-mini';
-      mini.onclick = () => openModal(origIdx);
-      mini.innerHTML = `<div class="s-art">${svgCover(c.svgType, c.svgFill, c.color)}</div><div class="s-title">${c.title}</div>`;
-      col.appendChild(mini);
-    });
-    grid.appendChild(col);
-  });
-}
-
-// ── MODAL ──
-function openModal(idx) {
-  const c = comics[idx];
-  document.getElementById('modal-cover').innerHTML = `<button class="modal-close" onclick="closeModal()">✕</button><div style="width:100%;height:100%">${svgCover(c.svgType, c.svgFill, c.color)}</div>`;
-  document.getElementById('modal-genre').textContent = c.genre;
-  document.getElementById('modal-title').textContent = c.title;
-  document.getElementById('modal-author').textContent = c.author;
-  document.getElementById('modal-desc').textContent = c.desc;
-  const eps = document.getElementById('modal-episodes');
-  eps.innerHTML = `<h4>الفصول (${c.episodes})</h4>`;
-  const total = Math.min(c.episodes, 5);
-  for (let i = 1; i <= total; i++) {
-    const isNew = i >= total - 1;
-    eps.innerHTML += `<div class="episode-item"><span class="ep-title">الفصل ${toArabicNum(i)}</span><span class="ep-meta">${isNew ? '<span class="ep-new">جديد</span>' : ''}منذ ${toArabicNum(i)} أسابيع</span></div>`;
-  }
-  document.getElementById('modal-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function closeModalOutside(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
-
-function toArabicNum(n) {
-  return n.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
-}
-
-// ── REVEAL ON SCROLL ──
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// ── INIT ──
-renderComics('all');
-renderSchedule();
-
-// Post-render reveal
-setTimeout(() => {
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-}, 100);
-</script>
+<script src="main.js"></script>
 </body>
 </html>
