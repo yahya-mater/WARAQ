@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ابن الصحراء — ف٣٨ | ورق WARAQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="reader.css">
+</head>
+<body class="reader-body">
+
+<!-- ═══ TOP BAR ═══ -->
+<div class="reader-bar" id="reader-top-bar">
+
+  <!-- Back -->
+  <a class="reader-bar-back" href="series.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>القصة</span>
+  </a>
+
+  <div class="reader-bar-divider"></div>
+
+  <!-- Title -->
+  <div class="reader-bar-title">
+    <span class="reader-bar-series">ابن الصحراء</span>
+    <span class="reader-bar-ep">الفصل ٣٨ — الريح التي تسمّيني</span>
+  </div>
+
+  <!-- Controls -->
+  <div class="reader-bar-controls">
+
+    <!-- Episode selector -->
+    <select class="ep-selector" id="ep-selector" title="اختر الفصل"></select>
+
+    <div class="reader-bar-divider"></div>
+
+    <!-- Mode toggle -->
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="mode-scroll" onclick="setMode('scroll')" title="وضع التمرير">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+        <span class="mode-label">تمرير</span>
+      </button>
+      <button class="mode-btn" id="mode-flip" onclick="setMode('flip')" title="وضع الصفحات">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="8" height="18" rx="1"/><rect x="13" y="3" width="8" height="18" rx="1"/></svg>
+        <span class="mode-label">صفحات</span>
+      </button>
+    </div>
+
+    <div class="reader-bar-divider"></div>
+
+    <!-- Settings -->
+    <button class="reader-icon-btn" id="settings-btn" onclick="toggleSettings()" title="الإعدادات">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+
+  </div>
+</div>
+
+<!-- ═══ PROGRESS BAR ═══ -->
+<div class="reader-progress-bar" id="reader-progress-bar">
+  <div class="reader-progress-fill" id="progress-fill"></div>
+</div>
+
+<!-- ═══ SETTINGS PANEL ═══ -->
+<div class="settings-panel" id="settings-panel">
+  <div class="settings-title">⚙ إعدادات القراءة</div>
+
+  <div class="settings-row">
+    <span class="settings-label">العرض</span>
+    <div class="settings-options">
+      <button class="settings-opt-btn" data-width="narrow">ضيّق</button>
+      <button class="settings-opt-btn active" data-width="normal">عادي</button>
+      <button class="settings-opt-btn" data-width="wide">واسع</button>
+    </div>
+  </div>
+
+  <div class="settings-row">
+    <span class="settings-label">الوضع</span>
+    <div class="settings-options">
+      <button class="settings-opt-btn active" onclick="setMode('scroll');this.closest('.settings-panel').querySelectorAll('[data-mode]').forEach(b=>b.classList.remove('active'));this.classList.add('active')" data-mode="scroll">تمرير</button>
+      <button class="settings-opt-btn" onclick="setMode('flip');this.closest('.settings-panel').querySelectorAll('[data-mode]').forEach(b=>b.classList.remove('active'));this.classList.add('active')" data-mode="flip">صفحات</button>
+    </div>
+  </div>
+
+  <div style="margin-top:4px">
+    <div class="settings-label" style="margin-bottom:8px">السطوع</div>
+    <input class="brightness-slider" type="range" min="20" max="100" value="100"
+      oninput="document.getElementById('scroll-container').style.filter='brightness('+this.value+'%)';document.getElementById('flip-stage').style.filter='brightness('+this.value+'%)'"
+    >
+  </div>
+</div>
+
+
+<!-- ═══ SCROLL MODE VIEW ═══ -->
+<div class="reader-scroll-view width-normal" id="scroll-view">
+  <div id="scroll-container"></div>
+</div>
+
+
+<!-- ═══ FLIP MODE VIEW ═══ -->
+<div class="reader-flip-view" id="flip-view">
+
+  <!-- Right arrow (= previous page in RTL reading) -->
+  <button class="flip-arrow prev-arrow" id="prev-arrow" onclick="flipPrev()" title="الصفحة السابقة">›</button>
+
+  <div class="flip-stage" id="flip-stage">
+    <!-- Pages injected by JS -->
+  </div>
+
+  <!-- Left arrow (= next page in RTL reading) -->
+  <button class="flip-arrow next-arrow" id="next-arrow" onclick="flipNext()" title="الصفحة التالية">‹</button>
+
+  <!-- End card shown on last page in flip mode -->
+  <div class="chapter-end-card" id="end-card-flip" style="position:absolute;inset:0;background:rgba(10,10,10,0.95);z-index:10;justify-content:center;">
+    <div class="end-icon">◆</div>
+    <div class="end-title">انتهى الفصل ٣٨</div>
+    <div class="end-sub">الريح التي تسمّيني</div>
+    <div class="end-actions" style="margin-top:24px">
+      <a class="btn btn-outline btn-xl" href="series.html">العودة للقصة</a>
+      <button class="btn btn-primary btn-xl" onclick="alert('الفصل التالي قريباً!')">الفصل القادم ◀</button>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══ PAGE NUMBER PILL ═══ -->
+<div class="page-num-pill" id="page-pill"></div>
+
+
+<!-- ═══ BOTTOM BAR ═══ -->
+<div class="reader-bottom-bar" id="reader-bottom-bar">
+
+  <!-- Prev episode -->
+  <a class="bottom-nav-btn" id="btn-prev-ep" href="series.html" title="الفصل السابق">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    <span>السابق</span>
+  </a>
+
+  <!-- Page slider -->
+  <div class="bottom-center">
+    <span class="page-label" id="page-label">١ / ١٨</span>
+    <input class="page-slider" id="page-slider" type="range" min="1" max="18" value="1"
+      oninput="onSliderChange(this.value)">
+  </div>
+
+  <!-- Action buttons -->
+  <div class="bottom-actions">
+    <button class="bottom-action-btn" id="like-btn" onclick="toggleLike()" title="إعجاب">♥</button>
+    <button class="bottom-action-btn" id="bookmark-btn" onclick="toggleBookmark()" title="حفظ">⌖</button>
+    <button class="bottom-action-btn" id="comments-toggle-btn" onclick="toggleComments()" title="التعليقات">💬</button>
+  </div>
+
+  <!-- Next episode -->
+  <button class="bottom-nav-btn primary-nav disabled" id="btn-next-ep" title="الفصل التالي">
+    <span>التالي</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+
+</div>
+
+
+<!-- ═══ COMMENTS DRAWER ═══ -->
+<div class="comments-drawer" id="comments-drawer">
+  <div class="drawer-handle"></div>
+
+  <div class="drawer-header">
+    <span class="drawer-title">التعليقات</span>
+    <button class="drawer-close" onclick="closeComments()">✕</button>
+  </div>
+
+  <!-- Compose row -->
+  <div class="drawer-compose">
+    <div class="drawer-avatar">أ</div>
+    <input class="drawer-input" type="text" placeholder="أضف تعليقاً...">
+  </div>
+
+  <!-- Scrollable list -->
+  <div class="drawer-comments-scroll" id="drawer-comments-list"></div>
+</div>
+
+
+<script src="reader.js"></script>
+</body>
+</html>

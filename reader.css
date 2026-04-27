@@ -1,0 +1,546 @@
+/* ══════════════════════════════════════════
+   WARAQ | ورق — Reader Page Styles
+   ══════════════════════════════════════════ */
+
+body.reader-body {
+  background: #0a0a0a;
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════════════════
+   TOP BAR
+   ══════════════════════════════════════════ */
+.reader-bar {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 900;
+  height: 52px;
+  background: rgba(8,8,8,0.97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,209,0,0.1);
+  display: flex; align-items: center;
+  padding: 0 12px; gap: 8px;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
+  overflow: hidden;
+}
+.reader-bar.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Back button — always on the right in RTL */
+.reader-bar-back {
+  display: flex; align-items: center; gap: 6px;
+  text-decoration: none; color: var(--gray);
+  font-size: 13px; font-weight: 600;
+  padding: 5px 8px; border-radius: 6px;
+  transition: all 0.2s; white-space: nowrap; flex-shrink: 0;
+}
+.reader-bar-back:hover { color: var(--yellow); background: var(--yellow-glow); }
+.reader-bar-back svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.reader-bar-divider {
+  width: 1px; height: 20px;
+  background: var(--dark3); flex-shrink: 0;
+}
+
+/* Title — takes all remaining space, truncates */
+.reader-bar-title {
+  display: flex; flex-direction: column;
+  flex: 1 1 0; min-width: 0;
+  direction: rtl;
+}
+.reader-bar-series {
+  font-size: 12px; font-weight: 700; color: var(--white);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.reader-bar-ep {
+  font-size: 10px; color: var(--gray);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/*
+  Controls group:
+  - Desktop: title (flex:1) pushes controls to the left naturally
+  - Mobile (title hidden via display:none): controls need margin-right:auto
+    to stay pinned to the LEFT edge (in LTR layout direction of the bar)
+*/
+.reader-bar-controls {
+  display: flex; align-items: center; gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Episode selector */
+.ep-selector {
+  background: var(--dark2);
+  border: 1px solid var(--dark3);
+  border-radius: 6px;
+  padding: 5px 8px;
+  color: var(--white);
+  font-family: var(--font-arabic);
+  font-size: 11px; font-weight: 600;
+  cursor: pointer; outline: none;
+  direction: rtl;
+  width: 120px;
+  transition: border-color 0.2s;
+}
+.ep-selector:focus { border-color: var(--yellow); }
+
+/* Mode toggle */
+.mode-toggle {
+  display: flex; background: var(--dark2); border-radius: 6px;
+  border: 1px solid var(--dark3); overflow: hidden; flex-shrink: 0;
+}
+.mode-btn {
+  padding: 5px 8px; border: none; background: none;
+  cursor: pointer; color: var(--gray);
+  display: flex; align-items: center; gap: 4px;
+  font-family: var(--font-arabic); font-size: 11px; font-weight: 600;
+  white-space: nowrap; transition: all 0.2s;
+}
+.mode-btn.active { background: var(--yellow); color: var(--black); }
+.mode-btn:hover:not(.active) { color: var(--white); }
+.mode-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* Settings icon */
+.reader-icon-btn {
+  width: 32px; height: 32px; border-radius: 6px;
+  background: var(--dark2); border: 1px solid var(--dark3);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--gray); transition: all 0.2s;
+  flex-shrink: 0;
+}
+.reader-icon-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+.reader-icon-btn.active { background: var(--yellow-glow); border-color: var(--yellow); color: var(--yellow); }
+
+
+/* ══════════════════════════════════════════
+   PROGRESS BAR
+   ══════════════════════════════════════════ */
+.reader-progress-bar {
+  position: fixed; top: 52px; left: 0; right: 0; z-index: 899;
+  height: 3px; background: var(--dark3);
+  transition: top 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.reader-progress-bar.bar-hidden { top: 0; }
+.reader-progress-fill {
+  height: 100%; background: var(--yellow);
+  width: 0%; transition: width 0.15s linear;
+  border-radius: 0 2px 2px 0;
+}
+
+
+/* ══════════════════════════════════════════
+   SCROLL MODE
+   ══════════════════════════════════════════ */
+.reader-scroll-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 55px;
+  padding-bottom: 70px;
+  min-height: 100vh;
+  width: 100%;
+}
+
+#scroll-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reader-scroll-view.width-narrow #scroll-container { max-width: 600px; }
+.reader-scroll-view.width-normal #scroll-container { max-width: 800px; }
+.reader-scroll-view.width-wide   #scroll-container { max-width: 100%; }
+
+.page-img-wrap {
+  width: 100%;
+  display: block;
+  line-height: 0;
+}
+.page-img-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.page-num-pill {
+  position: fixed; bottom: 76px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.75);
+  border: 1px solid rgba(255,209,0,0.25);
+  border-radius: 20px; padding: 5px 16px;
+  font-size: 12px; color: var(--white); font-weight: 600;
+  pointer-events: none; z-index: 700;
+  opacity: 0; transition: opacity 0.3s;
+  white-space: nowrap;
+}
+.page-num-pill.show { opacity: 1; }
+
+
+/* ══════════════════════════════════════════
+   FLIP MODE
+   ══════════════════════════════════════════ */
+.reader-flip-view {
+  display: none;
+  position: fixed; inset: 55px 0 56px 0;
+  align-items: center; justify-content: center;
+  background: #050505;
+  overflow: hidden;
+}
+.reader-flip-view.active { display: flex; }
+
+.flip-stage {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+}
+
+.flip-page {
+  display: none;
+  max-height: 100%;
+  max-width: calc(100% - 120px);
+}
+.flip-page.visible { display: flex; align-items: center; }
+.flip-page svg {
+  max-height: calc(100vh - 120px);
+  max-width: 100%;
+  width: auto; height: auto;
+  display: block;
+}
+
+.flip-arrow {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  z-index: 800;
+  width: 44px; height: 72px;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,209,0,0.15);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--gray);
+  font-size: 24px; transition: all 0.2s;
+  user-select: none;
+}
+.flip-arrow:hover { background: var(--yellow-glow); border-color: var(--yellow); color: var(--yellow); }
+.flip-arrow.prev-arrow { right: 8px; }
+.flip-arrow.next-arrow { left: 8px; }
+.flip-arrow.disabled { opacity: 0.15; pointer-events: none; }
+
+
+/* ══════════════════════════════════════════
+   BOTTOM BAR
+   ══════════════════════════════════════════ */
+.reader-bottom-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 900;
+  height: 56px;
+  background: rgba(8,8,8,0.97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(255,209,0,0.1);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 12px; gap: 8px;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.reader-bottom-bar.hidden { transform: translateY(100%); }
+
+.bottom-nav-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 12px; border-radius: 7px;
+  border: 1px solid var(--dark3); background: var(--dark2);
+  color: var(--white); font-family: var(--font-arabic);
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; white-space: nowrap; text-decoration: none;
+  flex-shrink: 0;
+}
+.bottom-nav-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+.bottom-nav-btn.primary-nav { background: var(--yellow); border-color: var(--yellow); color: var(--black); }
+.bottom-nav-btn.primary-nav:hover { background: #ffe44d; }
+.bottom-nav-btn.disabled { opacity: 0.3; pointer-events: none; }
+
+.bottom-center {
+  display: flex; align-items: center; gap: 8px;
+  flex: 1; justify-content: center; min-width: 0;
+}
+.page-slider {
+  --webkit-appearance: none;
+  flex: 1; max-width: 200px; height: 4px;
+  border-radius: 2px; outline: none; cursor: pointer;
+  background: var(--dark3);
+  direction: ltr;
+}
+.page-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--yellow);
+  box-shadow: 0 0 6px rgba(255,209,0,0.4);
+  cursor: pointer;
+}
+.page-label {
+  font-size: 11px; color: var(--gray); white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.bottom-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.bottom-action-btn {
+  width: 32px; height: 32px; border-radius: 6px;
+  background: var(--dark2); border: 1px solid var(--dark3);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--gray); transition: all 0.2s;
+  font-size: 14px;
+}
+.bottom-action-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+.bottom-action-btn.liked { color: #ff4d6d; border-color: #ff4d6d; }
+.bottom-action-btn.active { color: var(--yellow); border-color: var(--yellow); }
+
+
+/* ══════════════════════════════════════════
+   SETTINGS PANEL
+   ══════════════════════════════════════════ */
+.settings-panel {
+  position: fixed; top: 58px; left: 12px;
+  z-index: 950;
+  background: var(--dark2);
+  border: 1px solid rgba(255,209,0,0.18);
+  border-radius: 12px; padding: 18px;
+  width: 230px;
+  transform: scale(0.95) translateY(-6px);
+  opacity: 0; pointer-events: none;
+  transition: all 0.2s;
+  direction: rtl;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+}
+.settings-panel.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+.settings-title { font-size: 12px; font-weight: 700; margin-bottom: 14px; color: var(--yellow); letter-spacing: 0.5px; }
+.settings-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; gap: 8px; }
+.settings-label { font-size: 12px; color: var(--gray); flex-shrink: 0; }
+.settings-options { display: flex; gap: 5px; }
+.settings-opt-btn {
+  padding: 4px 9px; border-radius: 5px;
+  font-size: 11px; font-weight: 700; cursor: pointer;
+  border: 1px solid var(--dark3); background: none;
+  color: var(--gray); font-family: var(--font-arabic);
+  transition: all 0.15s;
+}
+.settings-opt-btn.active { background: var(--yellow); border-color: var(--yellow); color: var(--black); }
+.settings-opt-btn:hover:not(.active) { border-color: var(--gray2); color: var(--white); }
+
+.brightness-slider {
+  --webkit-appearance: none;
+  width: 100%; height: 4px; border-radius: 2px;
+  background: var(--dark3); outline: none; cursor: pointer; margin-top: 6px;
+}
+.brightness-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--yellow); cursor: pointer;
+}
+
+
+/* ══════════════════════════════════════════
+   END OF CHAPTER CARD
+   ══════════════════════════════════════════ */
+.chapter-end-card {
+  display: none;
+  flex-direction: column; align-items: center;
+  padding: 60px 24px 100px;
+  text-align: center; background: var(--black);
+  width: 100%;
+}
+.chapter-end-card.show { display: flex; }
+.end-icon {
+  width: 68px; height: 68px; border-radius: 50%;
+  background: var(--yellow-glow);
+  border: 2px solid rgba(255,209,0,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; margin-bottom: 18px;
+}
+.end-title { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.end-sub { font-size: 13px; color: var(--gray); margin-bottom: 28px; font-weight: 300; }
+.end-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+
+/* ══════════════════════════════════════════
+   COMMENTS DRAWER
+   ══════════════════════════════════════════
+
+   KEY FIX:
+   - bottom: 0  (not 56px) so translateY(100%) moves the drawer
+     fully below the viewport regardless of its height
+   - padding-bottom: 56px  so content isn't hidden under the bottom bar
+     when the drawer is open
+   - The drawer slides up from below the entire screen
+   ══════════════════════════════════════════ */
+.comments-drawer {
+  position: fixed;
+  bottom: 0;              /* anchor at very bottom of viewport */
+  left: 0; right: 0;
+  z-index: 850;
+  background: var(--dark2);
+  border-top: 1px solid rgba(255,209,0,0.18);
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  /* height: enough to show comments but not full screen */
+  max-height: 65vh;
+  /* hidden: slide fully off-screen downward */
+  transform: translateY(100%);
+  transition: transform 0.38s cubic-bezier(0.16,1,0.3,1);
+  direction: rtl;
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
+}
+.comments-drawer.open { transform: translateY(0); }
+
+.drawer-handle {
+  width: 36px; height: 4px; border-radius: 2px;
+  background: var(--dark3); margin: 12px auto 0;
+  flex-shrink: 0;
+}
+
+.drawer-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  flex-shrink: 0;
+}
+.drawer-title { font-size: 15px; font-weight: 700; }
+.drawer-close {
+  background: none; border: none; color: var(--gray);
+  font-size: 18px; cursor: pointer; padding: 4px; line-height: 1;
+  transition: color 0.2s;
+}
+.drawer-close:hover { color: var(--yellow); }
+
+.drawer-compose {
+  display: flex; gap: 10px; align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  flex-shrink: 0;
+}
+.drawer-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--yellow);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--black);
+  flex-shrink: 0;
+}
+.drawer-input {
+  flex: 1;
+  background: var(--dark3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 20px;
+  padding: 8px 14px;
+  color: var(--white);
+  font-family: var(--font-arabic);
+  font-size: 13px; outline: none;
+  direction: rtl;
+  transition: border-color 0.2s;
+}
+.drawer-input:focus { border-color: var(--yellow); }
+.drawer-input::placeholder { color: var(--gray2); }
+
+/* Scrollable list — takes remaining height, adds padding for bottom bar */
+.drawer-comments-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 20px;
+  padding-bottom: 68px; /* clears the 56px bottom bar + breathing room */
+  scrollbar-width: thin;
+  scrollbar-color: var(--yellow) var(--dark);
+}
+.drawer-comments-scroll::-webkit-scrollbar { width: 4px; }
+.drawer-comments-scroll::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 2px; }
+
+.drawer-comment-item {
+  display: flex; gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.drawer-comment-item:last-child { border-bottom: none; }
+.drawer-comment-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--black);
+  flex-shrink: 0; margin-top: 2px;
+}
+.drawer-comment-body { flex: 1; min-width: 0; }
+.drawer-comment-meta {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 4px; flex-wrap: wrap;
+}
+.drawer-comment-user { font-size: 12px; font-weight: 700; }
+.drawer-comment-time { font-size: 10px; color: var(--gray2); }
+.drawer-comment-text { font-size: 12px; color: #bbb; line-height: 1.65; font-weight: 300; }
+.drawer-comment-actions { display: flex; gap: 12px; margin-top: 6px; }
+.drawer-comment-like {
+  background: none; border: none; cursor: pointer;
+  font-size: 11px; color: var(--gray);
+  font-family: var(--font-arabic);
+  display: flex; align-items: center; gap: 4px;
+  transition: color 0.2s; padding: 0;
+}
+.drawer-comment-like:hover, .drawer-comment-like.liked { color: #ff4d6d; }
+
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — ≤ 768px
+   ══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .reader-bar-back span { display: none; }
+  .mode-btn .mode-label { display: none; }
+  .ep-selector { width: 90px; }
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — ≤ 480px  (the 425px problem size)
+
+   HEADER FIX:
+   Hide the title block. The bar now has only:
+     [back] [divider] [controls...]
+   We want controls pushed all the way LEFT (in LTR, which is how
+   the flex row is laid out even on an RTL page).
+   Solution: hide title + its adjacent dividers, then add
+   margin-left:auto on controls so they snap to the left edge.
+   ══════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .reader-bar { padding: 0 8px; gap: 5px; }
+
+  /* Hide title and the two dividers next to it */
+  .reader-bar-title { display: none; }
+  .reader-bar .reader-bar-divider { display: none; }
+
+  /* Push controls to the LEFT edge of the bar */
+  .reader-bar-controls {
+    margin-left: auto; /* in LTR flex = pushes to the left */
+    gap: 4px;
+  }
+
+  .ep-selector { width: 80px; font-size: 10px; padding: 4px 6px; }
+  .mode-btn { padding: 5px 6px; }
+  .reader-icon-btn { width: 28px; height: 28px; }
+  .reader-icon-btn svg { width: 13px; height: 13px; }
+
+  .flip-arrow { width: 34px; height: 56px; font-size: 20px; }
+  .flip-arrow.prev-arrow { right: 2px; }
+  .flip-arrow.next-arrow { left: 2px; }
+
+  .reader-bottom-bar { padding: 0 8px; gap: 5px; }
+  .bottom-nav-btn { padding: 6px 8px; font-size: 11px; gap: 4px; }
+  .bottom-nav-btn span { display: none; }
+  .page-slider { max-width: 100px; }
+  .page-label { display: none; }
+  .bottom-action-btn { width: 28px; height: 28px; font-size: 13px; }
+  .bottom-actions { gap: 4px; }
+
+  .settings-panel { left: 8px; right: 8px; width: auto; }
+  .comments-drawer { max-height: 72vh; }
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — ≤ 360px
+   ══════════════════════════════════════════ */
+@media (max-width: 360px) {
+  .ep-selector { width: 70px; }
+  .mode-toggle { display: none; }
+}
