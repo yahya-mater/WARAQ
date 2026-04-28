@@ -267,22 +267,32 @@ function initScrollObserver() {
   const pill = document.getElementById('page-pill');
   let pillTimer = null;
 
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting && e.target.dataset.page) {
-        currentPage = parseInt(e.target.dataset.page);
-        updateProgress();
+  window.addEventListener('scroll', () => {
+    if (mode !== 'scroll') return;
 
-        // pill
-        pill.textContent = `${toArabicNum(currentPage)} / ${toArabicNum(totalPages)}`;
-        pill.classList.add('show');
-        clearTimeout(pillTimer);
-        pillTimer = setTimeout(() => pill.classList.remove('show'), 1600);
+    const pages = document.querySelectorAll('.page-img-wrap[data-page]');
+    let closestPage = 1;
+    let closestDist = Infinity;
+
+    pages.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const dist = Math.abs(rect.top - 100); // 100px from top of viewport
+      if (dist < closestDist) {
+        closestDist = dist;
+        closestPage = parseInt(el.dataset.page);
       }
     });
-  }, { threshold: 0.35, rootMargin: '-5% 0px -45% 0px' });
 
-  document.querySelectorAll('.page-img-wrap[data-page]').forEach(el => obs.observe(el));
+    if (closestPage !== currentPage) {
+      currentPage = closestPage;
+      updateProgress();
+
+      pill.textContent = `${toArabicNum(currentPage)} / ${toArabicNum(totalPages)}`;
+      pill.classList.add('show');
+      clearTimeout(pillTimer);
+      pillTimer = setTimeout(() => pill.classList.remove('show'), 1600);
+    }
+  }, { passive: true });
 }
 
 /* ══════════════════════════════════════════
@@ -297,6 +307,9 @@ function renderFlipPages() {
     div.className = 'flip-page';
     div.dataset.page = p;
     div.innerHTML = generatePageSVG(p, totalPages);
+    div.style.width = '100%';
+    div.style.height = '100%';
+    div.style.display = 'none'; // let showFlipPage control visibility
     stage.appendChild(div);
   }
   showFlipPage(1);
@@ -305,17 +318,22 @@ function renderFlipPages() {
 function showFlipPage(pageNum) {
   currentPage = Math.max(1, Math.min(pageNum, totalPages));
 
-  document.querySelectorAll('.flip-page').forEach(el => el.classList.remove('visible'));
-  const target = document.querySelector(`.flip-page[data-page="${currentPage}"]`);
-  if (target) target.classList.add('visible');
+  document.querySelectorAll('.flip-page').forEach(el => {
+    el.style.display = 'none';
+    el.classList.remove('visible');
+  });
 
-  // end card
+  const target = document.querySelector(`.flip-page[data-page="${currentPage}"]`);
+  if (target) {
+    target.style.display = 'flex';
+    target.classList.add('visible');
+  }
+
   const endFlip = document.getElementById('end-card-flip');
   if (endFlip) endFlip.style.display = currentPage === totalPages ? 'flex' : 'none';
 
-  // arrows
-  const prevArrow = document.getElementById('prev-arrow'); // higher page (RTL "previous")
-  const nextArrow = document.getElementById('next-arrow'); // lower page  (RTL "next")
+  const prevArrow = document.getElementById('prev-arrow');
+  const nextArrow = document.getElementById('next-arrow');
   if (prevArrow) prevArrow.classList.toggle('disabled', currentPage >= totalPages);
   if (nextArrow) nextArrow.classList.toggle('disabled', currentPage <= 1);
 
@@ -465,7 +483,10 @@ function toggleComments() {
 }
 function closeComments() {
   commentsOpen = false;
-  document.getElementById('comments-drawer').classList.remove('open');
+  const drawer = document.getElementById('comments-drawer');
+  drawer.style.transform = ''; // clear inline style so CSS translateY(100%) works
+  drawer.style.maxHeight = ''; // reset to CSS default
+  drawer.classList.remove('open');
   document.getElementById('comments-toggle-btn').classList.remove('active');
 }
 
@@ -504,6 +525,75 @@ function toggleDrawerLike(idx, base) {
   btn.textContent = `♥ ${toArabicNum(base + (liked ? 1 : 0))}`;
 }
 
+function initDrawerGestures() {
+  const drawer = document.getElementById('comments-drawer');
+  const handle = document.getElementById('drawer-drag-zone');
+  let startY = 0;
+  let startH = 0;
+  let dragging = false;
+  let endClientY = 0;
+
+  function getDrawerH() { return drawer.getBoundingClientRect().height; }
+
+  function onStart(clientY) {
+    dragging = true;
+    startY = clientY;
+    startH = getDrawerH();
+    drawer.style.transition = 'none';
+  }
+
+  function onMove(clientY) {
+    if (!dragging) return;
+    const delta = startY - clientY;
+    const newH = Math.min(Math.max(startH + delta, 80), window.innerHeight);
+    drawer.style.maxHeight = newH + 'px';
+    drawer.style.transform = 'translateY(0)';
+  }
+
+  function onEnd(clientY) {
+    if (!dragging) return;
+    dragging = false;
+    endClientY = clientY;
+    drawer.style.transition = '';
+
+    const delta = startY - clientY;
+    const currentH = getDrawerH();
+
+    if (currentH <= 120 || delta < -(window.innerHeight * 0.08)) {
+      // too small or dragged down enough → dismiss
+      drawer.style.maxHeight = '';
+      drawer.style.transform = ''; // clear inline transform so CSS class takes over
+      closeComments();
+    } else if (delta > window.innerHeight * 0.15) {
+      drawer.style.maxHeight = '100vh';
+    } else {
+      drawer.style.maxHeight = '65vh';
+    }
+  }
+
+  // Mouse
+  handle.addEventListener('mousedown', e => onStart(e.clientY));
+  window.addEventListener('mousemove', e => { if (dragging) onMove(e.clientY); });
+  window.addEventListener('mouseup',   e => onEnd(e.clientY));
+
+  // Touch
+  handle.addEventListener('touchstart', e => onStart(e.touches[0].clientY), { passive: true });
+  window.addEventListener('touchmove',  e => { if (dragging) onMove(e.touches[0].clientY); }, { passive: true });
+  window.addEventListener('touchend',   e => onEnd(e.changedTouches[0].clientY));
+
+  // Click outside — delay so the toggle click that opened it doesn't immediately close it
+  document.addEventListener('click', e => {
+    if (!commentsOpen) return;
+    if (drawer.contains(e.target)) return;
+    if (e.target.id === 'comments-toggle-btn') return;
+    // ignore if this click was the drag-end touch (within 10px)
+    if (Math.abs(e.clientY - endClientY) < 10 && endClientY !== 0) return;
+
+    drawer.style.maxHeight = '';
+    closeComments();
+  }, { capture: true });
+}
+
 /* ─── LIKE / BOOKMARK ─── */
 function toggleLike() {
   liked = !liked;
@@ -529,6 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollObserver();
   initBarsAutoHide();
   initKeyboard();
+  initDrawerGestures();
 
   // Width buttons
   document.querySelectorAll('.settings-opt-btn[data-width]').forEach(btn => {

@@ -103,14 +103,14 @@
 <div class="reader-flip-view" id="flip-view">
 
   <!-- Right arrow (= previous page in RTL reading) -->
-  <button class="flip-arrow prev-arrow" id="prev-arrow" onclick="flipPrev()" title="الصفحة السابقة">›</button>
+  <button class="flip-arrow prev-arrow" id="next-arrow" onclick="flipNext()" dir="rtl" title="الصفحة السابقة">‹</button>
 
   <div class="flip-stage" id="flip-stage">
     <!-- Pages injected by JS -->
   </div>
 
   <!-- Left arrow (= next page in RTL reading) -->
-  <button class="flip-arrow next-arrow" id="next-arrow" onclick="flipNext()" title="الصفحة التالية">‹</button>
+  <button class="flip-arrow next-arrow" id="prev-arrow" onclick="flipPrev()" dir="rtl" title="الصفحة التالية">›</button>
 
   <!-- End card shown on last page in flip mode -->
   <div class="chapter-end-card" id="end-card-flip" style="position:absolute;inset:0;background:rgba(10,10,10,0.95);z-index:10;justify-content:center;">
@@ -141,9 +141,8 @@
 
   <!-- Page slider -->
   <div class="bottom-center">
+    <input class="page-slider" id="page-slider" dir="rtl" type="range" min="1" max="18" value="1" oninput="onSliderChange(this.value)">
     <span class="page-label" id="page-label">١ / ١٨</span>
-    <input class="page-slider" id="page-slider" type="range" min="1" max="18" value="1"
-      oninput="onSliderChange(this.value)">
   </div>
 
   <!-- Action buttons -->
@@ -164,7 +163,9 @@
 
 <!-- ═══ COMMENTS DRAWER ═══ -->
 <div class="comments-drawer" id="comments-drawer">
-  <div class="drawer-handle"></div>
+  <div id="drawer-drag-zone" style="width:100%;padding:10px 0;cursor:grab;display:flex;justify-content:center;flex-shrink:0;">
+    <div class="drawer-handle"></div>
+  </div>
 
   <div class="drawer-header">
     <span class="drawer-title">التعليقات</span>

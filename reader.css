@@ -202,11 +202,19 @@ body.reader-body {
   max-height: 100%;
   max-width: calc(100% - 120px);
 }
-.flip-page.visible { display: flex; align-items: center; }
+.flip-page.visible {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 120px); /* ← add this */
+  height: 100%;
+}
+
 .flip-page svg {
   max-height: calc(100vh - 120px);
+  width: auto;
+  height: auto;          
   max-width: 100%;
-  width: auto; height: auto;
   display: block;
 }
 
@@ -268,7 +276,7 @@ body.reader-body {
   flex: 1; max-width: 200px; height: 4px;
   border-radius: 2px; outline: none; cursor: pointer;
   background: var(--dark3);
-  direction: ltr;
+  direction: rtl;
 }
 .page-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -512,8 +520,9 @@ body.reader-body {
 
   /* Push controls to the LEFT edge of the bar */
   .reader-bar-controls {
-    margin-left: auto; /* in LTR flex = pushes to the left */
-    gap: 4px;
+    display: flex; align-items: center; gap: 6px;
+    flex-shrink: 0;
+    margin-right: auto;
   }
 
   .ep-selector { width: 80px; font-size: 10px; padding: 4px 6px; }
