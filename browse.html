@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تصفّح القصص | ورق WARAQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="browse.css">
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon"><span>و</span></div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-ar">ورق</span>
+      <span class="nav-logo-en">WARAQ</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="browse.html" style="color:var(--yellow)">تصفّح</a></li>
+    <li><a href="index.html#schedule">الجدول</a></li>
+    <li><a href="index.html#trending">الأكثر قراءة</a></li>
+    <li><a href="#">للمبدعين</a></li>
+  </ul>
+  <div class="nav-actions">
+    <input class="nav-search" type="text" placeholder="ابحث عن قصة...">
+    <a class="btn btn-outline nav-btn-login" href="#">دخول</a>
+    <a class="btn btn-primary nav-btn-register" href="#">سجّل مجاناً</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="القائمة" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="nav-drawer" id="nav-drawer">
+  <ul class="drawer-links">
+    <li><a href="browse.html">تصفّح</a></li>
+    <li><a href="index.html#schedule">الجدول</a></li>
+    <li><a href="index.html#trending">الأكثر قراءة</a></li>
+    <li><a href="#">للمبدعين</a></li>
+  </ul>
+  <input class="drawer-search" type="text" placeholder="ابحث عن قصة...">
+  <div class="drawer-actions">
+    <a class="btn btn-outline" href="#">دخول</a>
+    <a class="btn btn-primary" href="#">سجّل مجاناً</a>
+  </div>
+</div>
+
+
+<!-- ═══ BROWSE PAGE ═══ -->
+<div class="browse-page">
+
+  <!-- ── Search Hero ── -->
+  <div class="browse-hero">
+    <div class="browse-hero-title">اكتشف قصتك القادمة</div>
+
+    <div class="browse-search-wrap">
+      <div class="browse-search-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </div>
+      <input
+        class="browse-search"
+        id="browse-search"
+        type="text"
+        placeholder="ابحث بالعنوان أو الكاتب أو التصنيف..."
+        oninput="onSearchInput(this.value)"
+        autocomplete="off"
+      >
+      <button class="browse-search-clear" id="search-clear" onclick="clearSearch()" aria-label="مسح البحث">×</button>
+
+      <!-- Suggestions dropdown -->
+      <div class="search-suggestions" id="search-suggestions"></div>
+    </div>
+  </div>
+
+
+  <!-- ── Filters Bar ── -->
+  <div class="filters-bar">
+
+    <!-- Genre tabs -->
+    <div class="filter-group">
+      <button class="filter-btn active" data-genre="all"     onclick="setGenre('all',this)">الكل</button>
+      <button class="filter-btn"        data-genre="fantasy" onclick="setGenre('fantasy',this)">فانتازيا</button>
+      <button class="filter-btn"        data-genre="action"  onclick="setGenre('action',this)">أكشن</button>
+      <button class="filter-btn"        data-genre="romance" onclick="setGenre('romance',this)">رومانسية</button>
+      <button class="filter-btn"        data-genre="mystery" onclick="setGenre('mystery',this)">غموض</button>
+      <button class="filter-btn"        data-genre="scifi"   onclick="setGenre('scifi',this)">خيال علمي</button>
+      <button class="filter-btn"        data-genre="drama"   onclick="setGenre('drama',this)">درامية</button>
+      <button class="filter-btn"        data-genre="horror"  onclick="setGenre('horror',this)">رعب</button>
+    </div>
+
+    <!-- Sort + Status + View — pushed to the left -->
+    <div class="filter-group">
+
+      <select class="filter-select" id="sort-select" onchange="setSort(this.value)" title="الترتيب">
+        <option value="popular">الأكثر قراءة</option>
+        <option value="newest">الأحدث</option>
+        <option value="rating">الأعلى تقييماً</option>
+        <option value="episodes">الأطول</option>
+      </select>
+
+      <select class="filter-select" id="status-select" onchange="setStatus(this.value)" title="الحالة">
+        <option value="all">كل الحالات</option>
+        <option value="ongoing">مستمرة</option>
+        <option value="completed">مكتملة</option>
+      </select>
+
+      <!-- View toggle -->
+      <div class="view-toggle">
+        <button class="view-btn active" id="view-grid-btn" onclick="setView('grid')" title="عرض شبكي">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+          </svg>
+        </button>
+        <button class="view-btn" id="view-list-btn" onclick="setView('list')" title="عرض قائمة">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/>
+            <line x1="3" y1="18" x2="3.01" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Active filter chips -->
+  <div class="active-filters" id="active-filters"></div>
+
+
+  <!-- ── Results ── -->
+  <div class="browse-results">
+
+    <div class="results-header">
+      <span class="results-count" id="results-count"></span>
+    </div>
+
+    <!-- Grid / List container — class set by JS -->
+    <div id="results-container" class="browse-grid"></div>
+
+    <!-- Empty state -->
+    <div class="empty-state" id="empty-state">
+      <div class="empty-icon">🔍</div>
+      <div class="empty-title">لا توجد نتائج</div>
+      <div class="empty-sub">جرّب كلمة بحث مختلفة أو غيّر الفلاتر</div>
+    </div>
+
+    <!-- Load more -->
+    <div class="browse-load-more">
+      <button class="load-more-btn" id="load-more-btn" onclick="loadMore()" style="display:none">
+        عرض المزيد
+      </button>
+    </div>
+
+  </div>
+
+</div><!-- end .browse-page -->
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="index.html">
+        <div class="nav-logo-icon"><span>و</span></div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-ar">ورق</span>
+          <span class="nav-logo-en">WARAQ</span>
+        </div>
+      </a>
+      <p>منصة ورق — وجهتك العربية للقصص المصوّرة الأصيلة.</p>
+    </div>
+    <div class="footer-links-grid">
+      <div class="footer-col">
+        <h4>اكتشف</h4>
+        <a href="browse.html">كل القصص</a>
+        <a href="index.html#trending">الأكثر قراءة</a>
+        <a href="browse.html?genre=fantasy">فانتازيا</a>
+        <a href="browse.html?genre=action">أكشن</a>
+      </div>
+      <div class="footer-col">
+        <h4>للمبدعين</h4>
+        <a href="#">انشر قصتك</a>
+        <a href="#">دليل الرسّامين</a>
+        <a href="#">أدوات المبدع</a>
+      </div>
+      <div class="footer-col">
+        <h4>عن ورق</h4>
+        <a href="#">من نحن</a>
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">تواصل معنا</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 ورق – WARAQ. جميع الحقوق محفوظة.</span>
+    <div class="footer-socials">
+      <a class="social-btn" href="#" aria-label="تويتر">𝕏</a>
+      <a class="social-btn" href="#" aria-label="إنستغرام">◉</a>
+    </div>
+  </div>
+</footer>
+
+<script src="browse.js"></script>
+</body>
+</html>
