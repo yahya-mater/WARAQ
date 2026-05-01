@@ -23,6 +23,21 @@ body.auth-body {
 }
 .auth-back:hover { color: var(--yellow); border-color: var(--yellow); }
 
+.auth-nav {
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 56px; z-index: 100;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,209,0,0.1);
+  align-items: center;
+  padding: 0 20px;
+}
+
+@media (max-width: 900px) {
+  .auth-nav { display: flex; }
+  .auth-panel { padding-top: 80px; } /* push content below nav */
+}
 
 /* ══════════════════════════════════════════
    LAYOUT — side panel + form panel
@@ -38,7 +53,7 @@ body.auth-body {
   background: linear-gradient(160deg, #0f0e0a 0%, #1a1200 50%, #0a0a0a 100%);
   border-left: 1px solid rgba(255,209,0,0.08);
   position: relative; overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: top; justify-content: center;
 }
 .auth-side::before {
   content: 'WARAQ';
@@ -57,6 +72,7 @@ body.auth-body {
 }
 
 .auth-side-logo {
+  text-decoration: none;
   display: flex; align-items: center; gap: 12px;
 }
 
