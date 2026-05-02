@@ -12,7 +12,7 @@ const comics = [
     genre: 'فانتازيا · مغامرة',
     genreKey: 'fantasy',
     desc: 'يتيم تربّته الرمال والنجوم، يكتشف أن في عروقه دم ملوك منسيّين. رحلة تتجاوز الحدود والخرافات في قلب صحراء لا ترحم، وعدوّ لا وجه له.',
-    badge: 'رائج', badgeClass: 'hot', rating: '٤.٩', episodes: 38,
+    badge: 'رائج', badgeClass: 'hot', rating: '4.9', episodes: 38,
     color: ['#1a0a00','#2d1600'], svgFill: '#FFD100', svgType: 'hero'
   },
   {
@@ -21,7 +21,7 @@ const comics = [
     genre: 'غموض · مغامرة',
     genreKey: 'mystery',
     desc: 'في أعماق مدينة تحت الأرض توقّف فيها الزمن، تحاول المحققة جبر كشف سرّ اختفاء مدينة كاملة قبل أن تتكرر المأساة.',
-    badge: 'مميّز', badgeClass: '', rating: '٤.٨', episodes: 52,
+    badge: 'مميّز', badgeClass: '', rating: '4.8', episodes: 52,
     color: ['#0f0f1a','#1a1a2e'], svgFill: '#a78bfa', svgType: 'city'
   },
   {
@@ -30,7 +30,7 @@ const comics = [
     genre: 'خيال علمي · أكشن',
     genreKey: 'scifi',
     desc: 'في عالم يُكبّل فيه الجن بشرائح رقمية، تقاتل حارسة الطائفة الأخيرة لاستعادة ذاكرة شعبها — ولو كلّفها كل شيء.',
-    badge: 'جديد', badgeClass: 'new', rating: '٤.٧', episodes: 12,
+    badge: 'جديد', badgeClass: 'new', rating: '4.7', episodes: 12,
     color: ['#001a0a','#003d1a'], svgFill: '#00e5a0', svgType: 'circle'
   },
   {
@@ -39,7 +39,7 @@ const comics = [
     genre: 'أكشن · خيال',
     genreKey: 'action',
     desc: 'آخر الملائكة المحاربين يهبط إلى أرض خرّبها الفساد. معركة لا تنتهي بين الخير المُتعب والشر الذي لا يعرف الكلل.',
-    badge: 'رائج', badgeClass: 'hot', rating: '٤.٦', episodes: 65,
+    badge: 'رائج', badgeClass: 'hot', rating: '4.6', episodes: 65,
     color: ['#1a0a0a','#2d0000'], svgFill: '#ff6b6b', svgType: 'wing'
   },
   {
@@ -48,7 +48,7 @@ const comics = [
     genre: 'رومانسية · دراما',
     genreKey: 'romance',
     desc: 'بين طالبة نحت تعشق الصخر ومعماري يبني جدراناً حول قلبه — حب ينمو في صمت المراسم ويتشكّل مثل الطين.',
-    badge: '', badgeClass: '', rating: '٤.٥', episodes: 29,
+    badge: '', badgeClass: '', rating: '4.5', episodes: 29,
     color: ['#1a0010','#2d0020'], svgFill: '#f472b6', svgType: 'heart'
   },
   {
@@ -57,7 +57,7 @@ const comics = [
     genre: 'درامية · خيال',
     genreKey: 'drama',
     desc: 'فتاة تولد بين قمرين تتجاذبها قوتان لا تعرف لأيهما تنتمي. قصة هوية وانتماء في مجتمع يطلب منك أن تختار.',
-    badge: 'جديد', badgeClass: 'new', rating: '٤.٨', episodes: 8,
+    badge: 'جديد', badgeClass: 'new', rating: '4.8', episodes: 8,
     color: ['#0a001a','#150030'], svgFill: '#c084fc', svgType: 'moon'
   },
   {
@@ -66,7 +66,7 @@ const comics = [
     genre: 'رعب · غموض',
     genreKey: 'horror',
     desc: 'سبعة أشخاص في مبنى مهجور يكتشفون أن ظلالهم تتصرف بإرادة مستقلة. من هو الحقيقي؟ ومن هو الظل؟',
-    badge: '', badgeClass: '', rating: '٤.٤', episodes: 20,
+    badge: '', badgeClass: '', rating: '4.4', episodes: 20,
     color: ['#050505','#111111'], svgFill: '#6b7280', svgType: 'shadow'
   },
   {
@@ -74,8 +74,8 @@ const comics = [
     author: 'رسم وقصة: طارق العمري',
     genre: 'خيال علمي · أكشن',
     genreKey: 'scifi',
-    desc: 'في عام ٢٠٩٠، الآلات لا تنام ولا تتعب. البشر الأخيرون يتحصّنون خلف جدران الذاكرة القديمة — ذاكرة ما كانوا يوماً.',
-    badge: '', badgeClass: '', rating: '٤.٣', episodes: 33,
+    desc: 'في عام 2090، الآلات لا تنام ولا تتعب. البشر الأخيرون يتحصّنون خلف جدران الذاكرة القديمة — ذاكرة ما كانوا يوماً.',
+    badge: '', badgeClass: '', rating: '4.3', episodes: 33,
     color: ['#001015','#002030'], svgFill: '#38bdf8', svgType: 'tech'
   },
   {
@@ -84,7 +84,7 @@ const comics = [
     genre: 'تاريخي · مغامرة',
     genreKey: 'fantasy',
     desc: 'كاهنة معبد آمون تكشف مؤامرة تهدد عرش مصر. تتسلح بالمعرفة وحدها في عصر يرى المرأة ديكوراً لا سلاحاً.',
-    badge: 'مميّز', badgeClass: '', rating: '٤.٩', episodes: 44,
+    badge: 'مميّز', badgeClass: '', rating: '4.9', episodes: 44,
     color: ['#1a1000','#2d1c00'], svgFill: '#fbbf24', svgType: 'pharaoh'
   },
   {
@@ -93,7 +93,7 @@ const comics = [
     genre: 'مغامرة · فانتازيا',
     genreKey: 'action',
     desc: 'وادٍ لا تنتهي حدوده، مسكون بمخلوقات تأكل الأحلام. صبي فقد ذاكرته يجد أن جميع الوحوش تعرفه باسمه.',
-    badge: '', badgeClass: '', rating: '٤.٦', episodes: 27,
+    badge: '', badgeClass: '', rating: '4.6', episodes: 27,
     color: ['#0a1a00','#112200'], svgFill: '#84cc16', svgType: 'forest'
   }
 ];
@@ -120,7 +120,7 @@ function svgCover(type, fill, color) {
 
 /* ─── UTILS ─── */
 function toArabicNum(n) {
-  return n.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+  return n.toString().replace(/\d/g, d => '0123456789'[d]);
 }
 
 

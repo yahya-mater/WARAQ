@@ -14,9 +14,9 @@ const seriesData = {
   genreKey: 'fantasy',
   status: 'ongoing', // ongoing | completed
   rating: 4.9,
-  ratingCount: '١٢.٣K',
-  views: '٢.١M',
-  follows: '٨٥K',
+  ratingCount: '12.3K',
+  views: '2.1M',
+  follows: '85K',
   episodeCount: 38,
   desc: 'يتيم تربّته الرمال والنجوم، يكتشف أن في عروقه دم ملوك منسيّين. رحلة تتجاوز الحدود والخرافات في قلب صحراء لا ترحم، وعدوّ لا وجه له. حين تهبّ ريح الشمال بصوت لا يسمعه إلا هو، يدرك أن الصحراء لم تربّه — بل كانت تُعدّه.',
   descShort: 'يتيم تربّته الرمال والنجوم، يكتشف أن في عروقه دم ملوك منسيّين. رحلة تتجاوز الحدود والخرافات في قلب صحراء لا ترحم.',
@@ -58,7 +58,7 @@ function episodeTitle(n) {
 }
 
 function episodeDate(i) {
-  const dates = ['اليوم','أمس','منذ ٣ أيام','منذ أسبوع','منذ أسبوعين'];
+  const dates = ['اليوم','أمس','منذ 3 أيام','منذ أسبوع','منذ أسبوعين'];
   if (i < dates.length) return dates[i];
   const weeks = Math.floor(i / 1) + 1;
   return `منذ ${toArabicNum(weeks)} أسابيع`;
@@ -76,25 +76,25 @@ const characters = [
 
 /* ─── COMMENTS ─── */
 const comments = [
-  { user: 'أم.ق', initials: 'أ', color: '#FFD100', ep: 'ف٣٨', time: 'منذ ساعة', text: 'الفصل الأخير كسر قلبي! ما توقعت إن سالم يعرف الحقيقة بهالطريقة. ماجد الحربي فنان بحق 🔥', likes: 142, liked: false },
-  { user: 'ريم_ق', initials: 'ر', color: '#a78bfa', ep: 'ف٣٧', time: 'منذ ٣ ساعات', text: 'الفصل ٣٧ من أقوى فصول السيزن. المشهد بين سالم والعجوز نور... يا إلهي. القصة تعمّقت بشكل ما توقعته.', likes: 89, liked: false },
-  { user: 'خالد', initials: 'خ', color: '#00e5a0', ep: 'ف٣٨', time: 'منذ ٥ ساعات', text: 'نظرية: دانة هي نسل الملك الأول. كل الإشارات موجودة من الفصل ١٠. إذا صح هذا راح تنفجر الأمور في الفصل القادم 🤯', likes: 256, liked: true },
-  { user: 'سارة.ف', initials: 'س', color: '#f472b6', ep: 'ف٣٦', time: 'أمس', text: 'نورة العتيبي كاتبة استثنائية. القصة ما تشبه أي قصة عربية ثانية. أتمنى تترجم لغات ثانية عشان العالم يشوفها.', likes: 67, liked: false },
-  { user: 'م.ع', initials: 'م', color: '#38bdf8', ep: 'ف٣٥', time: 'منذ يومين', text: 'الرسم في الفصل ٣٥ من الله. المشهد الأخير مع الخاتم والرمال — كيف ينقل ماجد الحجم والمسافة بالطريقة هذي؟', likes: 45, liked: false },
+  { user: 'أم.ق', initials: 'أ', color: '#FFD100', ep: 'ف38', time: 'منذ ساعة', text: 'الفصل الأخير كسر قلبي! ما توقعت إن سالم يعرف الحقيقة بهالطريقة. ماجد الحربي فنان بحق 🔥', likes: 142, liked: false },
+  { user: 'ريم_ق', initials: 'ر', color: '#a78bfa', ep: 'ف37', time: 'منذ 3 ساعات', text: 'الفصل 37 من أقوى فصول السيزن. المشهد بين سالم والعجوز نور... يا إلهي. القصة تعمّقت بشكل ما توقعته.', likes: 89, liked: false },
+  { user: 'خالد', initials: 'خ', color: '#00e5a0', ep: 'ف38', time: 'منذ 5 ساعات', text: 'نظرية: دانة هي نسل الملك الأول. كل الإشارات موجودة من الفصل 10. إذا صح هذا راح تنفجر الأمور في الفصل القادم 🤯', likes: 256, liked: true },
+  { user: 'سارة.ف', initials: 'س', color: '#f472b6', ep: 'ف36', time: 'أمس', text: 'نورة العتيبي كاتبة استثنائية. القصة ما تشبه أي قصة عربية ثانية. أتمنى تترجم لغات ثانية عشان العالم يشوفها.', likes: 67, liked: false },
+  { user: 'م.ع', initials: 'م', color: '#38bdf8', ep: 'ف35', time: 'منذ يومين', text: 'الرسم في الفصل 35 من الله. المشهد الأخير مع الخاتم والرمال — كيف ينقل ماجد الحجم والمسافة بالطريقة هذي؟', likes: 45, liked: false },
 ];
 
 /* ─── RELATED SERIES ─── */
 const related = [
-  { title: 'بنت النيل', genre: 'تاريخي', rating: '٤.٩', color: ['#1a1000','#2d1c00'], svgFill: '#fbbf24', svgType: 'pharaoh' },
-  { title: 'وادي الوحوش', genre: 'مغامرة', rating: '٤.٦', color: ['#0a1a00','#112200'], svgFill: '#84cc16', svgType: 'forest' },
-  { title: 'الملاك الأخير', genre: 'أكشن', rating: '٤.٦', color: ['#1a0a0a','#2d0000'], svgFill: '#ff6b6b', svgType: 'wing' },
-  { title: 'حارسة الجن', genre: 'خيال علمي', rating: '٤.٧', color: ['#001a0a','#003d1a'], svgFill: '#00e5a0', svgType: 'circle' },
-  { title: 'الظل السابع', genre: 'رعب', rating: '٤.٤', color: ['#050505','#111111'], svgFill: '#6b7280', svgType: 'shadow' },
+  { title: 'بنت النيل', genre: 'تاريخي', rating: '4.9', color: ['#1a1000','#2d1c00'], svgFill: '#fbbf24', svgType: 'pharaoh' },
+  { title: 'وادي الوحوش', genre: 'مغامرة', rating: '4.6', color: ['#0a1a00','#112200'], svgFill: '#84cc16', svgType: 'forest' },
+  { title: 'الملاك الأخير', genre: 'أكشن', rating: '4.6', color: ['#1a0a0a','#2d0000'], svgFill: '#ff6b6b', svgType: 'wing' },
+  { title: 'حارسة الجن', genre: 'خيال علمي', rating: '4.7', color: ['#001a0a','#003d1a'], svgFill: '#00e5a0', svgType: 'circle' },
+  { title: 'الظل السابع', genre: 'رعب', rating: '4.4', color: ['#050505','#111111'], svgFill: '#6b7280', svgType: 'shadow' },
 ];
 
 /* ─── UTILS ─── */
 function toArabicNum(n) {
-  return n.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+  return n.toString().replace(/\d/g, d => '0123456789'[d]);
 }
 
 function svgCover(type, fill, color) {

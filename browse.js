@@ -13,7 +13,7 @@ const comics = [
   { title:'قلب من حجر',     author:'هالة نور / رنا الطاهر',          genre:'رومانسية · دراما',     genreKey:'romance', desc:'بين طالبة نحت تعشق الصخر ومعماري يبني جدراناً حول قلبه.',                                                  badge:'',      badgeClass:'',         rating:4.5, episodes:29, color:['#1a0010','#2d0020'], svgFill:'#f472b6', svgType:'heart'   },
   { title:'ليلى والقمرين',  author:'سلمى إبراهيم / داليا فريد',      genre:'درامية · خيال',        genreKey:'drama',   desc:'فتاة تولد بين قمرين تتجاذبها قوتان لا تعرف لأيهما تنتمي.',                                                  badge:'جديد',  badgeClass:'new',      rating:4.8, episodes:8,  color:['#0a001a','#150030'], svgFill:'#c084fc', svgType:'moon'    },
   { title:'الظل السابع',    author:'يوسف الحداد',                     genre:'رعب · غموض',           genreKey:'horror',  desc:'سبعة أشخاص في مبنى مهجور يكتشفون أن ظلالهم تتصرف بإرادة مستقلة.',                                          badge:'',      badgeClass:'',         rating:4.4, episodes:20, color:['#050505','#111111'], svgFill:'#6b7280', svgType:'shadow'  },
-  { title:'ثورة الآلات',    author:'طارق العمري',                     genre:'خيال علمي · أكشن',    genreKey:'scifi',   desc:'في عام ٢٠٩٠، الآلات لا تنام ولا تتعب.',                                                                   badge:'',      badgeClass:'',         rating:4.3, episodes:33, color:['#001015','#002030'], svgFill:'#38bdf8', svgType:'tech'    },
+  { title:'ثورة الآلات',    author:'طارق العمري',                     genre:'خيال علمي · أكشن',    genreKey:'scifi',   desc:'في عام 2090، الآلات لا تنام ولا تتعب.',                                                                   badge:'',      badgeClass:'',         rating:4.3, episodes:33, color:['#001015','#002030'], svgFill:'#38bdf8', svgType:'tech'    },
   { title:'بنت النيل',      author:'مريم الجوهري / إيمان سعد',       genre:'تاريخي · مغامرة',     genreKey:'fantasy', desc:'كاهنة معبد آمون تكشف مؤامرة تهدد عرش مصر.',                                                               badge:'مميّز', badgeClass:'featured', rating:4.9, episodes:44, color:['#1a1000','#2d1c00'], svgFill:'#fbbf24', svgType:'pharaoh' },
   { title:'وادي الوحوش',    author:'سامر المالكي',                    genre:'مغامرة · فانتازيا',   genreKey:'action',  desc:'وادٍ لا تنتهي حدوده، مسكون بمخلوقات تأكل الأحلام.',                                                       badge:'',      badgeClass:'',         rating:4.6, episodes:27, color:['#0a1a00','#112200'], svgFill:'#84cc16', svgType:'forest'  },
   { title:'نهر الروح',      author:'دينا خالد',                       genre:'رومانسية · خيال',     genreKey:'romance', desc:'رسّامة تكتشف أن لوحاتها تفتح نوافذ على أرواح الموتى.',                                                    badge:'جديد',  badgeClass:'new',      rating:4.7, episodes:15, color:['#001a1a','#003030'], svgFill:'#67e8f9', svgType:'circle'  },
@@ -42,7 +42,7 @@ function svgCover(type, fill, color) {
 }
 
 function toArabicNum(n) {
-  return n.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+  return n.toString().replace(/\d/g, d => '0123456789'[d]);
 }
 
 /* ══════════════════════════════════════════

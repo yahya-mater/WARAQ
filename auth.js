@@ -222,7 +222,7 @@ function submitRegister() {
   document.getElementById('terms-err').textContent = '';
 
   if (!username || username.length < 3) {
-    setError('reg-username', 'الاسم يجب أن يكون ٣ أحرف على الأقل'); valid = false;
+    setError('reg-username', 'الاسم يجب أن يكون 3 أحرف على الأقل'); valid = false;
   }
   if (!email) {
     setError('reg-email', 'البريد الإلكتروني مطلوب'); valid = false;
@@ -232,7 +232,7 @@ function submitRegister() {
   if (!pass) {
     setError('reg-password', 'كلمة المرور مطلوبة'); valid = false;
   } else if (!validatePassword(pass)) {
-    setError('reg-password', 'كلمة المرور يجب أن تكون ٨ أحرف على الأقل'); valid = false;
+    setError('reg-password', 'كلمة المرور يجب أن تكون 8 أحرف على الأقل'); valid = false;
   }
   if (pass && confirm !== pass) {
     setError('reg-confirm', 'كلمتا المرور غير متطابقتين'); valid = false;
@@ -274,7 +274,7 @@ function submitForgot() {
 
   showSuccess(
     'تم إرسال الرابط 📧',
-    `تحقق من بريدك ${email}. الرابط صالح لمدة ٣٠ دقيقة.`
+    `تحقق من بريدك ${email}. الرابط صالح لمدة 30 دقيقة.`
   );
 }
 
