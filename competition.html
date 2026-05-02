@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>مسابقة ورق أسرار للإبداع العربي ٢٠٢٦ | ورق WARAQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="competition.css">
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon"><span>و</span></div>
+    <div class="nav-logo-text"><span class="nav-logo-ar">ورق</span><span class="nav-logo-en">WARAQ</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="browse.html">تصفّح</a></li>
+    <li><a href="#branches">الفروع</a></li>
+    <li><a href="#prizes">الجوائز</a></li>
+    <li><a href="#timeline">المواعيد</a></li>
+    <li><a href="#apply" style="color:var(--yellow)">شارك الآن</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a class="btn btn-outline nav-btn-login" href="auth.html">دخول</a>
+    <a class="btn btn-primary nav-btn-register" href="#apply">شارك الآن</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="القائمة" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer" id="nav-drawer">
+  <ul class="drawer-links">
+    <li><a href="#branches">الفروع</a></li>
+    <li><a href="#prizes">الجوائز</a></li>
+    <li><a href="#timeline">المواعيد</a></li>
+    <li><a href="#apply">شارك الآن</a></li>
+  </ul>
+  <div class="drawer-actions">
+    <a class="btn btn-outline" href="auth.html">دخول</a>
+    <a class="btn btn-primary" href="#apply">شارك الآن</a>
+  </div>
+</div>
+
+
+<!-- ═══ HERO ═══ -->
+<div class="comp-page-hero">
+  <div class="comp-hero-bg-text">أسرار</div>
+
+  <div class="comp-hero-inner">
+    <div class="comp-hero-badge">
+      <span class="comp-badge-dot"></span>
+      الدورة الأولى — ٢٠٢٦
+    </div>
+
+    <h1 class="comp-hero-title">
+      مسابقة <span>ورق أسرار</span><br>للإبداع العربي
+    </h1>
+    <p class="comp-hero-tagline">بكم تُكتب.. وبكم تُقرأ</p>
+    <p class="comp-hero-sub">
+      مسابقة أدبية وفنية من نوعها الأول، مفتوحة لطلبة وطالبات أقسام اللغة العربية في كل أنحاء العالم.
+      <strong>القصص منكم — والرسم منّا.</strong>
+    </p>
+
+    <div class="comp-hero-stats">
+      <div class="comp-hstat"><span class="comp-hstat-num">٩</span><span class="comp-hstat-label">فائزون</span></div>
+      <div class="comp-hstat-div"></div>
+      <div class="comp-hstat"><span class="comp-hstat-num">٣</span><span class="comp-hstat-label">فروع إبداعية</span></div>
+      <div class="comp-hstat-div"></div>
+      <div class="comp-hstat"><span class="comp-hstat-num">١٠٠$</span><span class="comp-hstat-label">لكل فائز</span></div>
+      <div class="comp-hstat-div"></div>
+      <div class="comp-hstat"><span class="comp-hstat-num">مجاني</span><span class="comp-hstat-label">المشاركة</span></div>
+    </div>
+
+    <div class="comp-hero-actions">
+      <a class="btn btn-primary btn-xl" href="#apply">سجّل مشاركتك الآن ◀</a>
+      <a class="btn btn-outline btn-xl" href="#branches">تعرّف على الفروع</a>
+    </div>
+  </div>
+
+  <!-- Decorative floating cards -->
+  <div class="comp-hero-art">
+    <div class="comp-art-card comp-art-card--1">
+      <div class="comp-art-label">قصص متسلسلة</div>
+      <div class="comp-art-icon" style="color:#FFD100">◎</div>
+      <div class="comp-art-sub">٤–٨ حلقات سردية</div>
+    </div>
+    <div class="comp-art-card comp-art-card--2">
+      <div class="comp-art-label">أشعار</div>
+      <div class="comp-art-icon" style="color:#a78bfa">✦</div>
+      <div class="comp-art-sub">١٠–٣٠ بيتاً</div>
+    </div>
+    <div class="comp-art-card comp-art-card--3">
+      <div class="comp-art-label">ملوّنات</div>
+      <div class="comp-art-icon" style="color:#00e5a0">⬡</div>
+      <div class="comp-art-sub">سيناريو للكوميكس</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ABOUT ═══ -->
+<section class="comp-section" id="about">
+  <div class="comp-container">
+    <div class="comp-about-grid reveal">
+      <div class="comp-about-text">
+        <div class="comp-section-label">◆ من نحن</div>
+        <h2 class="comp-section-title">وُلدنا لنُخرج القصص من الظلّ إلى النور</h2>
+        <p>وُلدت منصة ورق أسرار لتكون نواةً لقصصٍ تخرج من الظلّ إلى النور. بعد أن تلامس قصصنا قلوب القراء وعقولهم، نحلم أن تتجسّد أمامنا تمثيلاً وإخراجاً.</p>
+        <p>من هذا الشغف بالحكاية، نُطلق مبادرتنا الأولى: مسابقة ورق للإبداع العربي. مسابقة لبناء كنز قصصي من القصص المتسلسلة والملوّنات، كتّابها هم طلبة أقسام اللغة العربية في جميع أنحاء العالم.</p>
+        <div class="comp-highlight">
+          <span>هذه هي ورق: منصةٌ عربية، <strong>بكم تُكتب، وبكم تُقرأ.</strong></span>
+        </div>
+      </div>
+      <div class="comp-about-goals">
+        <h3 class="comp-goals-title">أهداف المسابقة</h3>
+        <div class="comp-goal-item">
+          <div class="comp-goal-icon">◎</div>
+          <div>
+            <div class="comp-goal-name">اكتشاف المواهب</div>
+            <div class="comp-goal-desc">رعاية المبدعين الشباب في الكتابة الإبداعية والرسم القصصي والشعر</div>
+          </div>
+        </div>
+        <div class="comp-goal-item">
+          <div class="comp-goal-icon">✦</div>
+          <div>
+            <div class="comp-goal-name">منصة احترافية للنشر</div>
+            <div class="comp-goal-desc">نشر الأعمال الفائزة والوصول بها إلى قراء من كل العالم العربي</div>
+          </div>
+        </div>
+        <div class="comp-goal-item">
+          <div class="comp-goal-icon">⬡</div>
+          <div>
+            <div class="comp-goal-name">تشجيع الإبداع الرقمي</div>
+            <div class="comp-goal-desc">دعم أشكال النشر الحديثة: الحلقات المسلسلة والملوّنات العمودية</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ BRANCHES ═══ -->
+<section class="comp-section comp-section--dark" id="branches">
+  <div class="comp-container">
+    <div class="comp-section-header reveal">
+      <div class="comp-section-label">◆ فروع المسابقة</div>
+      <h2 class="comp-section-title">ثلاثة فروع، إبداع واحد</h2>
+      <p class="comp-section-sub">اختر الفرع الذي يناسب موهبتك — المشاركة في فرع واحد فقط لكل متسابق</p>
+    </div>
+
+    <div class="comp-branches-grid reveal">
+
+      <!-- Branch 1 -->
+      <div class="comp-branch-card">
+        <div class="comp-branch-num" style="color:#FFD100;border-color:rgba(255,209,0,0.2)">١</div>
+        <div class="comp-branch-icon-lg" style="background:rgba(255,209,0,0.1);color:#FFD100">◎</div>
+        <h3 class="comp-branch-title">القصص المتسلسلة</h3>
+        <div class="comp-branch-specs">
+          <div class="comp-spec"><span class="comp-spec-label">اللغة</span><span class="comp-spec-val">فصحى أو عامية مفهومة</span></div>
+          <div class="comp-spec"><span class="comp-spec-label">الحلقات</span><span class="comp-spec-val">٤ إلى ٨ حلقات</span></div>
+          <div class="comp-spec"><span class="comp-spec-label">طول الحلقة</span><span class="comp-spec-val">٥٠٠ – ١٥٠٠ كلمة</span></div>
+          <div class="comp-spec"><span class="comp-spec-label">التصنيف العمري</span><span class="comp-spec-val comp-spec-active">مطلوب</span></div>
+        </div>
+        <ul class="comp-branch-notes">
+          <li>كل حلقة بداية ونهاية تشدّ القارئ للتالية</li>
+          <li>مناسبة لإضافة صور تعبيرية مرافقة</li>
+          <li>ورق تتكفل بالرسامين لتصوير الحلقات</li>
+        </ul>
+        <a class="comp-branch-cta" href="#apply" style="border-color:rgba(255,209,0,0.3);color:#FFD100">شارك في هذا الفرع ◀</a>
+      </div>
+
+      <!-- Branch 2 -->
+      <div class="comp-branch-card">
+        <div class="comp-branch-num" style="color:#a78bfa;border-color:rgba(167,139,250,0.2)">٢</div>
+        <div class="comp-branch-icon-lg" style="background:rgba(167,139,250,0.1);color:#a78bfa">✦</div>
+        <h3 class="comp-branch-title">الأشعار</h3>
+        <div class="comp-branch-specs">
+          <div class="comp-spec"><span class="comp-spec-label">اللغة</span><span class="comp-spec-val">فصحى أو عامية مفهومة</span></div>
+          <div class="comp-spec"><span class="comp-spec-label">الطول</span><span class="comp-spec-val">١٠ إلى ٣٠ بيتاً / سطراً</span></div>
+          <div class="comp-spec"><span class="comp-spec-label">الموضوع</span><span class="comp-spec-val">مفتوح</span></div>
+          <div class="comp-spec"><span class="comp-spec-label">الشكل</span><span class="comp-spec-val">حر أو عمودي</span></div>
+        </div>
+        <ul class="comp-branch-notes">
+          <li>موضوع مفتوح بلا قيود</li>
+          <li>ورق تضيف صورة تعبيرية عند النشر</li>
+          <li>يُنشر العمل في قائمة ورق مختار</li>
+        </ul>
+        <a class="comp-branch-cta" href="#apply" style="border-color:rgba(167,139,250,0.3);color:#a78bfa">شارك في هذا الفرع ◀</a>
+      </div>
+
+      <!-- Branch 3 -->
+      <div class="comp-branch-card">
+        <div class="comp-branch-num" style="color:#00e5a0;border-color:rgba(0,229,160,0.2)">٣</div>
+        <div class="comp-branch-icon-lg" style="background:rgba(0,229,160,0.1);color:#00e5a0">⬡</div>
+        <h3 class="comp-branch-title">الملوّنات</h3>
+        <div class="comp-branch-specs">
+          <div class="comp-spec"><span class="comp-spec-label">الأسلوب</span><span class="comp-spec-val">سيناريو حواري</span></div>
+          <div class="comp-spec"><span class="comp-spec-label">الحلقات</span><span class="comp-spec-val">٤ إلى ٨ حلقات</span></div>
+          <div class="comp-spec"><span class="comp-spec-label">الشكل النهائي</span><span class="comp-spec-val">Webtoon / كوميكس</span></div>
+          <div class="comp-spec"><span class="comp-spec-label">التصنيف العمري</span><span class="comp-spec-val comp-spec-active">مطلوب</span></div>
+        </div>
+        <ul class="comp-branch-notes">
+          <li>نص جاهز للتحويل إلى قصة مصورة</li>
+          <li>ورق تتعاقد مع رسامين محترفين</li>
+          <li>الناتج: ملوّنة عمودية كاملة</li>
+        </ul>
+        <a class="comp-branch-cta" href="#apply" style="border-color:rgba(0,229,160,0.3);color:#00e5a0">شارك في هذا الفرع ◀</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PRIZES ═══ -->
+<section class="comp-section" id="prizes">
+  <div class="comp-container">
+    <div class="comp-section-header reveal">
+      <div class="comp-section-label">◆ الجوائز</div>
+      <h2 class="comp-section-title">٣ فائزون من كل فرع — ٩ فائزون إجمالاً</h2>
+      <p class="comp-section-sub">كل فائز يحصل على الجوائز الأربع التالية بدون استثناء</p>
+    </div>
+
+    <div class="comp-prizes-grid reveal">
+      <div class="comp-prize-card--lg">
+        <div class="comp-prize-icon" style="background:rgba(255,209,0,0.1);color:#FFD100">💰</div>
+        <div class="comp-prize-val-lg">١٠٠ دولار كندي</div>
+        <div class="comp-prize-name">جائزة نقدية</div>
+        <p class="comp-prize-desc">تُصرف بالعملة المحلية للفائز عبر الوسيلة الأنسب له</p>
+      </div>
+      <div class="comp-prize-card--lg">
+        <div class="comp-prize-icon" style="background:rgba(0,229,160,0.1);color:#00e5a0">🎨</div>
+        <div class="comp-prize-val-lg">إنتاج فني</div>
+        <div class="comp-prize-name">على نفقة المنصة</div>
+        <p class="comp-prize-desc">رسوم تعبيرية للقصص والأشعار، وقصة مصورة كاملة للملوّنات</p>
+      </div>
+      <div class="comp-prize-card--lg">
+        <div class="comp-prize-icon" style="background:rgba(167,139,250,0.1);color:#a78bfa">⭐</div>
+        <div class="comp-prize-val-lg">ورق مختار</div>
+        <div class="comp-prize-name">قائمة الصدارة</div>
+        <p class="comp-prize-desc">نشر مباشر في القائمة المنتقاة — مع تضمين إنتاجك المستقبلي دون مراجعة</p>
+      </div>
+      <div class="comp-prize-card--lg">
+        <div class="comp-prize-icon" style="background:rgba(251,146,60,0.1);color:#fb923c">📜</div>
+        <div class="comp-prize-val-lg">شهادة رسمية</div>
+        <div class="comp-prize-name">توثيق أدبي</div>
+        <p class="comp-prize-desc">شهادة فوز رسمية من منصة ورق موثّقة وقابلة للمشاركة</p>
+      </div>
+    </div>
+
+    <!-- Bonus note -->
+    <div class="comp-bonus-note reveal">
+      <div class="comp-bonus-icon">✦</div>
+      <div>
+        <strong>بند الاستدعاء:</strong> يحق للجنة استدعاء أعمال لم تدخل القائمة النهائية إذا وجدت فيها قيمة أدبية أو فنية استثنائية — وكل من يصل لمرحلة العبور يُنشر عمله في قائمة "ورق محتار".
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ EVALUATION ═══ -->
+<section class="comp-section comp-section--dark" id="evaluation">
+  <div class="comp-container">
+    <div class="comp-section-header reveal">
+      <div class="comp-section-label">◆ آلية التقييم</div>
+      <h2 class="comp-section-title">تقييم أكاديمي عادل وشفاف</h2>
+    </div>
+
+    <div class="comp-eval-grid reveal">
+      <div class="comp-eval-card">
+        <div class="comp-eval-step">١</div>
+        <h3>مرحلة العبور</h3>
+        <p>تُراجع جميع الأعمال المقدّمة من اللجنة الأكاديمية. كل عمل يجتاز هذه المرحلة يُنشر في قائمة "ورق محتار".</p>
+      </div>
+      <div class="comp-eval-arrow">◀</div>
+      <div class="comp-eval-card">
+        <div class="comp-eval-step">٢</div>
+        <h3>مرحلة الوصول</h3>
+        <p>تُختار أفضل الأعمال التي اجتازت العبور للتنافس على جوائز الفرع، ويُعلن عن الفائزين الثلاثة من كل فرع.</p>
+      </div>
+    </div>
+
+    <div class="comp-criteria reveal">
+      <h3 class="comp-criteria-title">معايير التقييم</h3>
+      <div class="comp-criteria-grid">
+        <div class="comp-criterion"><span class="comp-criterion-dot" style="background:#FFD100"></span>الأصالة وعدم النشر السابق</div>
+        <div class="comp-criterion"><span class="comp-criterion-dot" style="background:#a78bfa"></span>جودة اللغة وسلامة التعبير</div>
+        <div class="comp-criterion"><span class="comp-criterion-dot" style="background:#00e5a0"></span>قوة السرد والبناء القصصي</div>
+        <div class="comp-criterion"><span class="comp-criterion-dot" style="background:#fb923c"></span>ملاءمة النشر الرقمي المتسلسل</div>
+        <div class="comp-criterion"><span class="comp-criterion-dot" style="background:#f472b6"></span>القابلية للتحويل البصري (للملوّنات)</div>
+      </div>
+      <p class="comp-criteria-note">لجنة التقييم مكوّنة من أساتذة وخريجي أقسام اللغة العربية من مختلف أنحاء الوطن العربي.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ CONDITIONS ═══ -->
+<section class="comp-section" id="conditions">
+  <div class="comp-container">
+    <div class="comp-section-header reveal">
+      <div class="comp-section-label">◆ الشروط العامة</div>
+      <h2 class="comp-section-title">شروط واضحة وبسيطة</h2>
+    </div>
+    <div class="comp-conditions-grid reveal">
+      <div class="comp-condition-card comp-condition-card--yes">
+        <div class="comp-cond-header">✓ المسموح</div>
+        <ul>
+          <li>المشاركة مجانية بالكامل</li>
+          <li>مفتوحة لجميع طلبة وطالبات أقسام اللغة العربية</li>
+          <li>الكتابة بالفصحى أو العامية المفهومة عربياً</li>
+          <li>المشاركة من أي دولة في العالم</li>
+          <li>الاحتفاظ الكامل بحقوق الملكية الفكرية</li>
+        </ul>
+      </div>
+      <div class="comp-condition-card comp-condition-card--no">
+        <div class="comp-cond-header">✗ غير المسموح</div>
+        <ul>
+          <li>الأعمال المنشورة سابقاً في أي منصة أو مطبوعة</li>
+          <li>الأعمال الجماعية — المشاركة فردية فقط</li>
+          <li>تقديم أكثر من عمل واحد في الفرع ذاته</li>
+          <li>أعمال تحتوي على محتوى مسيء أو تحريضي</li>
+        </ul>
+      </div>
+      <div class="comp-condition-card comp-condition-card--info">
+        <div class="comp-cond-header">◆ حقوق الملكية</div>
+        <ul>
+          <li>يحتفظ المتسابق بكامل حقوق ملكيته الفكرية</li>
+          <li>ورق تحصل على ترخيص نشر غير حصري فقط</li>
+          <li>يحق للمنصة استخدام اسمك وعنوان عملك للترويج</li>
+          <li>إمكانية التعاقد المستقبلي مع المنصة بأجر</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ TIMELINE ═══ -->
+<section class="comp-section comp-section--dark" id="timeline">
+  <div class="comp-container">
+    <div class="comp-section-header reveal">
+      <div class="comp-section-label">◆ المواعيد</div>
+      <h2 class="comp-section-title">جدول المسابقة</h2>
+    </div>
+    <div class="comp-timeline reveal">
+      <div class="comp-tl-item comp-tl-item--active">
+        <div class="comp-tl-dot"></div>
+        <div class="comp-tl-content">
+          <div class="comp-tl-date">قريباً</div>
+          <div class="comp-tl-title">فتح باب المشاركة</div>
+          <div class="comp-tl-desc">يُعلن عن التاريخ الرسمي قريباً عبر موقع waraqasrar.com</div>
+        </div>
+      </div>
+      <div class="comp-tl-item">
+        <div class="comp-tl-dot"></div>
+        <div class="comp-tl-content">
+          <div class="comp-tl-date">يُحدد لاحقاً</div>
+          <div class="comp-tl-title">إغلاق باب المشاركة</div>
+          <div class="comp-tl-desc">آخر موعد لاستقبال الأعمال المقدّمة</div>
+        </div>
+      </div>
+      <div class="comp-tl-item">
+        <div class="comp-tl-dot"></div>
+        <div class="comp-tl-content">
+          <div class="comp-tl-date">يُحدد لاحقاً</div>
+          <div class="comp-tl-title">إعلان القائمة القصيرة</div>
+          <div class="comp-tl-desc">الأعمال التي اجتازت مرحلة العبور — وتُنشر في ورق محتار</div>
+        </div>
+      </div>
+      <div class="comp-tl-item">
+        <div class="comp-tl-dot"></div>
+        <div class="comp-tl-content">
+          <div class="comp-tl-date">يُحدد لاحقاً</div>
+          <div class="comp-tl-title">إعلان الفائزين</div>
+          <div class="comp-tl-desc">الإعلان عن الفائزين الثلاثة من كل فرع</div>
+        </div>
+      </div>
+      <div class="comp-tl-item">
+        <div class="comp-tl-dot comp-tl-dot--special"></div>
+        <div class="comp-tl-content">
+          <div class="comp-tl-date" style="color:#FFD100">سبتمبر ٢٠٢٦</div>
+          <div class="comp-tl-title">الإطلاق الرسمي ونشر الأعمال</div>
+          <div class="comp-tl-desc">نشر الأعمال الفائزة مع الإطلاق الرسمي لمنصة ورق</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ APPLY FORM ═══ -->
+<section class="comp-section" id="apply">
+  <div class="comp-container">
+    <div class="comp-section-header reveal">
+      <div class="comp-section-label">◆ كيفية المشاركة</div>
+      <h2 class="comp-section-title">سجّل مشاركتك الآن</h2>
+      <p class="comp-section-sub">عبر QR Code أو من خلال النموذج أدناه — المشاركة مجانية بالكامل</p>
+    </div>
+
+    <div class="comp-apply-grid reveal">
+
+      <!-- QR + contact -->
+      <div class="comp-apply-sidebar">
+        <div class="comp-qr-card">
+          <div class="comp-qr-box">
+            <!-- Decorative QR placeholder -->
+            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+              <rect width="120" height="120" fill="#111"/>
+              <!-- QR pattern simulation -->
+              <rect x="10" y="10" width="40" height="40" rx="4" fill="none" stroke="#FFD100" stroke-width="3"/>
+              <rect x="16" y="16" width="28" height="28" rx="2" fill="#FFD100" opacity="0.9"/>
+              <rect x="70" y="10" width="40" height="40" rx="4" fill="none" stroke="#FFD100" stroke-width="3"/>
+              <rect x="76" y="16" width="28" height="28" rx="2" fill="#FFD100" opacity="0.9"/>
+              <rect x="10" y="70" width="40" height="40" rx="4" fill="none" stroke="#FFD100" stroke-width="3"/>
+              <rect x="16" y="76" width="28" height="28" rx="2" fill="#FFD100" opacity="0.9"/>
+              <!-- dots -->
+              <rect x="70" y="70" width="10" height="10" rx="2" fill="#FFD100" opacity="0.7"/>
+              <rect x="84" y="70" width="10" height="10" rx="2" fill="#FFD100" opacity="0.5"/>
+              <rect x="98" y="70" width="12" height="10" rx="2" fill="#FFD100" opacity="0.8"/>
+              <rect x="70" y="84" width="12" height="10" rx="2" fill="#FFD100" opacity="0.6"/>
+              <rect x="86" y="84" width="10" height="10" rx="2" fill="#FFD100" opacity="0.9"/>
+              <rect x="70" y="98" width="10" height="12" rx="2" fill="#FFD100" opacity="0.4"/>
+              <rect x="84" y="98" width="26" height="12" rx="2" fill="#FFD100" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="comp-qr-label">امسح للتسجيل</div>
+          <div class="comp-qr-url">waraqasrar.com</div>
+        </div>
+        <div class="comp-contact-info">
+          <div class="comp-contact-item">
+            <span class="comp-contact-icon">✉</span>
+            <a href="mailto:info@waraqasrar.com">info@waraqasrar.com</a>
+          </div>
+          <div class="comp-contact-item">
+            <span class="comp-contact-icon">🌐</span>
+            <a href="https://waraqasrar.com" target="_blank">waraqasrar.com</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="comp-form-card" id="comp-form-wrap">
+        <form class="comp-form" id="comp-form" onsubmit="submitCompForm(event)">
+
+          <div class="comp-form-row">
+            <div class="comp-form-field">
+              <label class="comp-label">الاسم الكامل *</label>
+              <input class="comp-input" type="text" id="cf-name" placeholder="اسمك الثلاثي" required>
+            </div>
+            <div class="comp-form-field">
+              <label class="comp-label">البريد الإلكتروني *</label>
+              <input class="comp-input" type="email" id="cf-email" placeholder="example@email.com" dir="ltr" required>
+            </div>
+          </div>
+
+          <div class="comp-form-row">
+            <div class="comp-form-field">
+              <label class="comp-label">الجامعة / المؤسسة *</label>
+              <input class="comp-input" type="text" id="cf-university" placeholder="اسم الجامعة والقسم" required>
+            </div>
+            <div class="comp-form-field">
+              <label class="comp-label">الدولة *</label>
+              <input class="comp-input" type="text" id="cf-country" placeholder="دولتك" required>
+            </div>
+          </div>
+
+          <div class="comp-form-field">
+            <label class="comp-label">فرع المشاركة *</label>
+            <div class="comp-branch-select">
+              <div class="comp-branch-opt" data-val="stories" onclick="selectBranch(this)">
+                <span style="color:#FFD100">◎</span> القصص المتسلسلة
+              </div>
+              <div class="comp-branch-opt" data-val="poetry" onclick="selectBranch(this)">
+                <span style="color:#a78bfa">✦</span> الأشعار
+              </div>
+              <div class="comp-branch-opt" data-val="comics" onclick="selectBranch(this)">
+                <span style="color:#00e5a0">⬡</span> الملوّنات
+              </div>
+            </div>
+            <input type="hidden" id="cf-branch">
+            <span class="comp-field-err" id="cf-branch-err"></span>
+          </div>
+
+          <div class="comp-form-field">
+            <label class="comp-label">عنوان العمل *</label>
+            <input class="comp-input" type="text" id="cf-title" placeholder="عنوان قصتك أو قصيدتك أو ملوّنتك" required>
+          </div>
+
+          <div class="comp-form-field">
+            <label class="comp-label">نبذة مختصرة عن العمل *</label>
+            <textarea class="comp-input comp-textarea" id="cf-synopsis" rows="3"
+              placeholder="وصف مختصر لفكرة عملك (٥٠ – ٢٠٠ كلمة)" required></textarea>
+            <span class="comp-word-count" id="cf-wc">٠ كلمة</span>
+          </div>
+
+          <div class="comp-form-field">
+            <label class="comp-checkbox-wrap">
+              <input type="checkbox" id="cf-original" required>
+              <span class="comp-checkbox"></span>
+              أؤكد أن عملي أصلي وغير منشور سابقاً في أي منصة أو مطبوعة
+            </label>
+          </div>
+          <div class="comp-form-field">
+            <label class="comp-checkbox-wrap">
+              <input type="checkbox" id="cf-terms" required>
+              <span class="comp-checkbox"></span>
+              أوافق على <a href="terms.html" class="comp-link" target="_blank">شروط المسابقة</a> وأمنح ورق ترخيص نشر غير حصري لعملي
+            </label>
+          </div>
+
+          <button class="btn btn-primary comp-submit-btn" type="submit" id="comp-submit-btn">
+            <span>أرسل طلب المشاركة ◀</span>
+          </button>
+        </form>
+
+        <!-- Success state -->
+        <div class="comp-form-success hidden" id="comp-form-success">
+          <div class="comp-success-icon">✓</div>
+          <h3>تم استلام طلبك!</h3>
+          <p>شكراً لمشاركتك في مسابقة ورق أسرار. سنتواصل معك على بريدك الإلكتروني قريباً.</p>
+          <p class="comp-success-note">تابع waraqasrar.com لمعرفة آخر المستجدات.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="index.html">
+        <div class="nav-logo-icon"><span>و</span></div>
+        <div class="nav-logo-text"><span class="nav-logo-ar">ورق</span><span class="nav-logo-en">WARAQ</span></div>
+      </a>
+      <p>منصة ورق — وجهتك العربية للقصص المصوّرة الأصيلة. بكم تُكتب، وبكم تُقرأ.</p>
+    </div>
+    <div class="footer-links-grid">
+      <div class="footer-col"><h4>المسابقة</h4><a href="#branches">الفروع</a><a href="#prizes">الجوائز</a><a href="#timeline">المواعيد</a><a href="#apply">شارك الآن</a></div>
+      <div class="footer-col"><h4>المنصة</h4><a href="browse.html">تصفّح القصص</a><a href="auth.html">إنشاء حساب</a></div>
+      <div class="footer-col"><h4>عن ورق</h4><a href="about.html">من نحن</a><a href="privacy.html">الخصوصية</a><a href="terms.html">الشروط</a><a href="mailto:info@waraqasrar.com">تواصل معنا</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 ورق أسرار – waraqasrar.com</span>
+    <div class="footer-socials"><a class="social-btn" href="#">𝕏</a><a class="social-btn" href="#">◉</a></div>
+  </div>
+</footer>
+
+<script src="competition.js"></script>
+</body>
+</html>

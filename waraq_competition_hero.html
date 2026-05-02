@@ -1,0 +1,231 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap');
+  .wq-hero {
+    font-family: 'Tajawal', sans-serif;
+    direction: rtl;
+    background: #0a0a0a;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    padding: 52px 48px 44px;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .wq-bg-text {
+    position: absolute;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 180px;
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,209,0,0.07);
+    bottom: -40px;
+    left: -10px;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -4px;
+  }
+  .wq-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,209,0,0.12);
+    border: 1px solid rgba(255,209,0,0.3);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #FFD100;
+    letter-spacing: 1px;
+    margin-bottom: 22px;
+    width: fit-content;
+  }
+  .wq-badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #FFD100;
+    animation: blink 1.6s ease infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .wq-title {
+    font-size: 42px;
+    font-weight: 900;
+    color: #F5F0E8;
+    line-height: 1.15;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .wq-title span { color: #FFD100; }
+  .wq-sub {
+    font-size: 15px;
+    color: #888;
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 520px;
+    margin-bottom: 36px;
+    position: relative;
+  }
+  .wq-sub strong { color: #F5F0E8; font-weight: 600; }
+  .wq-branches {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+    position: relative;
+  }
+  .wq-branch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 9px 16px;
+    color: #ccc;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .wq-branch-icon {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .wq-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .wq-btn-primary {
+    background: #FFD100;
+    color: #0a0a0a;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 28px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .wq-btn-primary:hover { background: #ffe44d; transform: translateY(-1px); }
+  .wq-btn-outline {
+    background: transparent;
+    color: #888;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 13px 28px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .wq-btn-outline:hover { border-color: rgba(255,209,0,0.4); color: #FFD100; }
+  .wq-prizes {
+    position: absolute;
+    top: 52px; left: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .wq-prize-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,209,0,0.12);
+    border-radius: 10px;
+    padding: 12px 16px;
+    width: 160px;
+    text-align: center;
+  }
+  .wq-prize-val {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: #FFD100;
+    display: block;
+    margin-bottom: 3px;
+  }
+  .wq-prize-label {
+    font-size: 11px;
+    color: #666;
+    font-weight: 400;
+  }
+  .wq-divider {
+    width: 1px;
+    height: 100%;
+    background: rgba(255,255,255,0.05);
+    position: absolute;
+    left: 256px; top: 0;
+  }
+</style>
+
+<div class="wq-hero">
+  <div class="wq-bg-text">ورق</div>
+
+  <!-- Badge -->
+  <div>
+    <div class="wq-badge">
+      <div class="wq-badge-dot"></div>
+      مسابقة ورق أسرار للإبداع العربي — الدورة الأولى ٢٠٢٦
+    </div>
+
+    <!-- Title -->
+    <div class="wq-title">
+      القصص <span>منكم</span><br>والرسم <span>منّا.</span>
+    </div>
+
+    <!-- Subtitle -->
+    <div class="wq-sub">
+      مسابقة أدبية وفنية مفتوحة لطلبة أقسام اللغة العربية في كل مكان.
+      <strong>شارك بكلماتك</strong> — نتكفّل بتحويلها إلى محتوى بصري احترافي.
+    </div>
+
+    <!-- Branches -->
+    <div class="wq-branches">
+      <div class="wq-branch">
+        <div class="wq-branch-icon" style="background:rgba(255,209,0,0.15);color:#FFD100">◎</div>
+        قصص متسلسلة (٤–٨ حلقات)
+      </div>
+      <div class="wq-branch">
+        <div class="wq-branch-icon" style="background:rgba(167,139,250,0.15);color:#a78bfa">✦</div>
+        أشعار (١٠–٣٠ بيتاً)
+      </div>
+      <div class="wq-branch">
+        <div class="wq-branch-icon" style="background:rgba(0,229,160,0.15);color:#00e5a0">⬡</div>
+        ملوّنات (سيناريو للكوميكس)
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="wq-actions">
+      <button class="wq-btn-primary" onclick="sendPrompt('أريد تفاصيل أكثر عن مسابقة ورق أسرار وكيفية المشاركة')">
+        سجّل مشاركتك ◀
+      </button>
+      <button class="wq-btn-outline" onclick="sendPrompt('ما هي جوائز مسابقة ورق أسرار؟')">
+        تعرّف على الجوائز
+      </button>
+    </div>
+  </div>
+
+  <!-- Prize cards strip at bottom -->
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:36px;position:relative;z-index:1;border-top:1px solid rgba(255,255,255,0.05);padding-top:24px;">
+    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,209,0,0.06);border:1px solid rgba(255,209,0,0.15);border-radius:8px;padding:10px 18px;">
+      <span style="font-size:20px;font-weight:900;color:#FFD100;font-family:'Tajawal',sans-serif">١٠٠$</span>
+      <span style="font-size:12px;color:#666">جائزة نقدية لكل فائز</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 18px;">
+      <span style="font-size:13px;color:#ccc;font-family:'Tajawal',sans-serif">إنتاج فني احترافي على نفقة المنصة</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 18px;">
+      <span style="font-size:13px;color:#ccc;font-family:'Tajawal',sans-serif">نشر في قائمة "ورق مختار"</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 18px;">
+      <span style="font-size:13px;color:#ccc;font-family:'Tajawal',sans-serif">شهادة فوز رسمية</span>
+    </div>
+  </div>
+</div>

@@ -307,6 +307,90 @@ nav {
 .cover-title { font-size: 16px; font-weight: 900; color: var(--white); }
 .cover-genre { font-size: 11px; color: var(--yellow); margin-top: 4px; }
 
+/* ══════════════════════════════════════════
+   COMPETITION HERO
+   ══════════════════════════════════════════ */
+.comp-hero {
+  background: var(--dark2);
+  border: 1px solid rgba(255,209,0,0.12);
+  border-radius: 16px;
+  padding: 52px 48px;
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.comp-bg-text {
+  position: absolute; bottom: -30px; left: -10px;
+  font-size: 200px; font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,209,0,0.05);
+  pointer-events: none; user-select: none; line-height: 1;
+  font-family: var(--font-arabic);
+}
+.comp-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,209,0,0.1);
+  border: 1px solid rgba(255,209,0,0.25);
+  border-radius: 20px; padding: 5px 14px;
+  font-size: 12px; font-weight: 700; color: var(--yellow);
+  margin-bottom: 20px; width: fit-content;
+}
+.comp-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--yellow);
+  animation: pulse 1.6s ease infinite;
+}
+.comp-title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900; line-height: 1.15; margin-bottom: 14px;
+}
+.comp-title span { color: var(--yellow); }
+.comp-sub {
+  font-size: 14px; color: var(--gray); line-height: 1.8;
+  font-weight: 300; margin-bottom: 28px; max-width: 520px;
+}
+.comp-sub strong { color: var(--white); font-weight: 600; }
+.comp-branches {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px;
+}
+.comp-branch {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px; padding: 8px 14px;
+  font-size: 13px; color: #ccc; font-weight: 500;
+}
+.comp-branch-icon {
+  width: 22px; height: 22px; border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; flex-shrink: 0;
+}
+.comp-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.comp-prizes {
+  display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1;
+}
+.comp-prize-card {
+  background: rgba(255,209,0,0.05);
+  border: 1px solid rgba(255,209,0,0.12);
+  border-radius: 10px; padding: 16px;
+  text-align: center; display: flex; flex-direction: column; gap: 4px;
+}
+.comp-prize-val {
+  font-size: 26px; font-weight: 900; color: var(--yellow);
+}
+.comp-prize-label { font-size: 11px; color: var(--gray); }
+
+@media (max-width: 768px) {
+  .comp-hero { grid-template-columns: 1fr; padding: 32px 24px; }
+  .comp-prizes { flex-direction: row; flex-wrap: wrap; }
+  .comp-prize-card { flex: 1; min-width: 100px; }
+}
+@media (max-width: 480px) {
+  #competition { padding: 40px 20px 0; }
+}
 
 /* ══════════════════════════════════════════
    SECTION COMMON
