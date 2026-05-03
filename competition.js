@@ -60,6 +60,8 @@ function submitCompForm(e) {
   const synopsis   = document.getElementById('cf-synopsis').value.trim();
   const original   = document.getElementById('cf-original').checked;
   const terms      = document.getElementById('cf-terms').checked;
+  const file       = document.getElementById('cf-file').files[0];
+
 
   // Clear previous errors
   ['cf-name','cf-email','cf-university','cf-country','cf-title','cf-synopsis'].forEach(clearInputError);
@@ -84,6 +86,11 @@ function submitCompForm(e) {
     return;
   }
 
+  if (!file) {
+    document.getElementById('cf-file-err').textContent = 'يرجى رفع ملف العمل';
+    valid = false;
+  }
+
   // Loading state
   const btn = document.getElementById('comp-submit-btn');
   btn.classList.add('loading');
@@ -95,6 +102,48 @@ function submitCompForm(e) {
     // Scroll to success
     document.getElementById('comp-form-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, 1500);
+}
+
+function handleFileSelect(input) {
+  const file = input.files[0];
+  const err = document.getElementById('cf-file-err');
+  const content = document.getElementById('comp-file-content');
+  const drop = document.getElementById('comp-file-drop');
+
+  if (!file) return;
+
+  const validTypes = ['application/pdf',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+  const maxSize = 10 * 1024 * 1024; // 10MB
+
+  if (!validTypes.includes(file.type)) {
+    err.textContent = 'صيغة الملف غير مقبولة — يرجى رفع PDF أو DOCX فقط';
+    input.value = ''; return;
+  }
+  if (file.size > maxSize) {
+    err.textContent = 'حجم الملف يتجاوز ١٠MB';
+    input.value = ''; return;
+  }
+
+  err.textContent = '';
+  drop.style.borderColor = '#00e5a0';
+  content.innerHTML = `
+    <span style="font-size:28px">${file.name.endsWith('.pdf') ? '📕' : '📘'}</span>
+    <span style="font-size:13px;color:#00e5a0;font-weight:600">${file.name}</span>
+    <span style="font-size:11px;color:var(--gray)">${(file.size/1024/1024).toFixed(2)} MB</span>
+    <span style="font-size:11px;color:var(--yellow);cursor:pointer" onclick="document.getElementById('cf-file').click()">تغيير الملف</span>`;
+}
+
+// Drag and drop
+const drop = document.getElementById('comp-file-drop');
+if (drop) {
+  drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('dragover'); });
+  drop.addEventListener('dragleave', () => drop.classList.remove('dragover'));
+  drop.addEventListener('drop', e => {
+    e.preventDefault(); drop.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file) { document.getElementById('cf-file').files = e.dataTransfer.files; handleFileSelect(document.getElementById('cf-file')); }
+  });
 }
 
 /* ─── MOBILE NAV ─── */

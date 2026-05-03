@@ -266,6 +266,20 @@
   font-size: 14px; outline: none; direction: rtl;
   transition: border-color 0.2s; width: 100%;
 }
+.comp-file-drop {
+  display: flex; align-items: center; justify-content: center;
+  border: 1.5px dashed rgba(255,255,255,0.1);
+  border-radius: 10px; padding: 28px 20px;
+  cursor: pointer; transition: all 0.2s;
+  background: var(--dark3);
+}
+.comp-file-drop:hover,
+.comp-file-drop.dragover { border-color: var(--yellow); background: var(--yellow-glow); }
+.comp-file-drop input[type="file"] { display: none; }
+.comp-file-content { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.comp-file-icon { font-size: 28px; }
+.comp-file-text { font-size: 13px; color: var(--gray); }
+.comp-file-hint { font-size: 11px; color: var(--gray2); }
 .comp-input:focus { border-color: var(--yellow); }
 .comp-textarea { resize: vertical; min-height: 90px; }
 .comp-word-count { font-size: 11px; color: var(--gray); text-align: left; }

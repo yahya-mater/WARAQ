@@ -510,6 +510,20 @@
             <span class="comp-word-count" id="cf-wc">٠ كلمة</span>
           </div>
 
+          <!-- Work submission -->
+          <div class="comp-form-field">
+            <label class="comp-label">رفع العمل * <span style="font-size:11px;color:var(--gray);font-weight:300">(PDF أو DOCX — بحد أقصى 10MB)</span></label>
+            <label class="comp-file-drop" id="comp-file-drop">
+              <input type="file" id="cf-file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" onchange="handleFileSelect(this)">
+              <div class="comp-file-content" id="comp-file-content">
+                <span class="comp-file-icon">📄</span>
+                <span class="comp-file-text">اسحب الملف هنا أو <strong style="color:var(--yellow)">اضغط للاختيار</strong></span>
+                <span class="comp-file-hint">PDF · DOCX · حد أقصى 10MB</span>
+              </div>
+            </label>
+            <span class="comp-field-err" id="cf-file-err"></span>
+          </div>
+
           <div class="comp-form-field">
             <label class="comp-checkbox-wrap">
               <input type="checkbox" id="cf-original" required>
