@@ -3,47 +3,58 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>مسابقة ورق أسرار للإبداع العربي 2026 | ورق WARAQ</title>
+  <title>مسابقة ورق أسرار للإبداع العربي ٢٠٢٦ | ورق WARAQ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="competition.css">
 </head>
 <body>
-
+<!-- ═══ NAVIGATION ═══ -->
 <nav>
   <a class="nav-logo" href="index.html">
     <div class="nav-logo-icon"><span>و</span></div>
-    <div class="nav-logo-text"><span class="nav-logo-ar">ورق</span><span class="nav-logo-en">WARAQ</span></div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-ar">ورق</span>
+      <span class="nav-logo-en">WARAQ</span>
+    </div>
   </a>
+
   <ul class="nav-links">
     <li><a href="browse.html">تصفّح</a></li>
-    <li><a href="#branches">الفروع</a></li>
-    <li><a href="#prizes">الجوائز</a></li>
-    <li><a href="#timeline">المواعيد</a></li>
-    <li><a href="#apply" style="color:var(--yellow)">شارك الآن</a></li>
+    <li><a href="#schedule">ورق مختار</a></li>
+    <li><a href="#trending">ورق محتار</a></li>
+    <li><a href="#trending">ملونات</a></li>
+    <li><a href="#trending">أشعار</a></li>
+    <li><a href="#creators">للمبدعين</a></li>
   </ul>
+
   <div class="nav-actions">
+    <input class="nav-search" type="text" placeholder="ابحث عن قصة...">
     <a class="btn btn-outline nav-btn-login" href="auth.html">دخول</a>
-    <a class="btn btn-primary nav-btn-register" href="#apply">شارك الآن</a>
+    <a class="btn btn-primary nav-btn-register" href="auth.html">سجّل مجاناً</a>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="القائمة" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
-<div class="nav-drawer" id="nav-drawer">
+
+<!-- Mobile drawer -->
+<div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="القائمة الرئيسية">
   <ul class="drawer-links">
-    <li><a href="#branches">الفروع</a></li>
-    <li><a href="#prizes">الجوائز</a></li>
-    <li><a href="#timeline">المواعيد</a></li>
-    <li><a href="#apply">شارك الآن</a></li>
+    <li><a href="browse.html">تصفّح</a></li>
+    <li><a href="#schedule">ورق مختار</a></li>
+    <li><a href="#trending">ورق محتار</a></li>
+    <li><a href="#trending">ملونات</a></li>
+    <li><a href="#trending">أشعار</a></li>
+    <li><a href="#creators">للمبدعين</a></li>
   </ul>
+  <input class="drawer-search" type="text" placeholder="ابحث عن قصة...">
   <div class="drawer-actions">
     <a class="btn btn-outline" href="auth.html">دخول</a>
-    <a class="btn btn-primary" href="#apply">شارك الآن</a>
+    <a class="btn btn-primary" href="auth.html">سجّل مجاناً</a>
   </div>
 </div>
-
 
 <!-- ═══ HERO ═══ -->
 <div class="comp-page-hero">
@@ -85,12 +96,12 @@
     <div class="comp-art-card comp-art-card--1">
       <div class="comp-art-label">قصص متسلسلة</div>
       <div class="comp-art-icon" style="color:#FFD100">◎</div>
-      <div class="comp-art-sub">4–8 حلقات سردية</div>
+      <div class="comp-art-sub">8-4 حلقات سردية</div>
     </div>
     <div class="comp-art-card comp-art-card--2">
       <div class="comp-art-label">أشعار</div>
       <div class="comp-art-icon" style="color:#a78bfa">✦</div>
-      <div class="comp-art-sub">10–30 بيتاً</div>
+      <div class="comp-art-sub">30-10 بيتاً</div>
     </div>
     <div class="comp-art-card comp-art-card--3">
       <div class="comp-art-label">ملوّنات</div>
@@ -496,21 +507,25 @@
             <label class="comp-label">نبذة مختصرة عن العمل *</label>
             <textarea class="comp-input comp-textarea" id="cf-synopsis" rows="3"
               placeholder="وصف مختصر لفكرة عملك (50 – 200 كلمة)" required></textarea>
-            <span class="comp-word-count" id="cf-wc">0 كلمة</span>
+            <span class="comp-word-count" id="cf-wc">٠ كلمة</span>
           </div>
 
           <div class="comp-form-field">
             <label class="comp-checkbox-wrap">
               <input type="checkbox" id="cf-original" required>
               <span class="comp-checkbox"></span>
-              أؤكد أن عملي أصلي وغير منشور سابقاً في أي منصة أو مطبوعة
+              <p>
+                أؤكد أن عملي أصلي وغير منشور سابقاً في أي منصة أو مطبوعة
+              </p>
             </label>
           </div>
           <div class="comp-form-field">
             <label class="comp-checkbox-wrap">
               <input type="checkbox" id="cf-terms" required>
               <span class="comp-checkbox"></span>
-              أوافق على <a href="terms.html" class="comp-link" target="_blank">شروط المسابقة</a> وأمنح ورق ترخيص نشر غير حصري لعملي
+              <p>
+                أوافق على <a href="terms.html" class="comp-link" target="_blank">شروط المسابقة</a> وأمنح ورق ترخيص نشر غير حصري لعملي
+              </p>
             </label>
           </div>
 
@@ -532,26 +547,51 @@
   </div>
 </section>
 
-
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
       <a class="nav-logo" href="index.html">
         <div class="nav-logo-icon"><span>و</span></div>
-        <div class="nav-logo-text"><span class="nav-logo-ar">ورق</span><span class="nav-logo-en">WARAQ</span></div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-ar">ورق</span>
+          <span class="nav-logo-en">WARAQ</span>
+        </div>
       </a>
-      <p>منصة ورق — وجهتك العربية للقصص المصوّرة الأصيلة. بكم تُكتب، وبكم تُقرأ.</p>
+      <p>منصة ورق — وجهتك العربية للقصص المصوّرة الأصيلة. نؤمن أن كل ورقة تحمل عالماً.</p>
     </div>
     <div class="footer-links-grid">
-      <div class="footer-col"><h4>المسابقة</h4><a href="#branches">الفروع</a><a href="#prizes">الجوائز</a><a href="#timeline">المواعيد</a><a href="#apply">شارك الآن</a></div>
-      <div class="footer-col"><h4>المنصة</h4><a href="browse.html">تصفّح القصص</a><a href="auth.html">إنشاء حساب</a></div>
-      <div class="footer-col"><h4>عن ورق</h4><a href="about.html">من نحن</a><a href="privacy.html">الخصوصية</a><a href="terms.html">الشروط</a><a href="mailto:info@waraqasrar.com">تواصل معنا</a></div>
+      <div class="footer-col">
+        <h4>اكتشف</h4>
+        <a href="#">القصص الجديدة</a>
+        <a href="#">الأكثر قراءة</a>
+        <a href="#">حسب التصنيف</a>
+        <a href="#">قصص مكتملة</a>
+      </div>
+      <div class="footer-col">
+        <h4>للمبدعين</h4>
+        <a href="#">انشر قصتك</a>
+        <a href="#">دليل الرسّامين</a>
+        <a href="#">أدوات المبدع</a>
+        <a href="#">برنامج الدعم</a>
+      </div>
+      <div class="footer-col">
+        <h4>عن ورق</h4>
+        <a href="about.html">من نحن</a>
+        <a href="privacy.html">سياسة الخصوصية</a>
+        <a href="terms.html">الشروط والأحكام</a>
+        <a href="#">تواصل معنا</a>
+      </div>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 ورق أسرار – waraqasrar.com</span>
-    <div class="footer-socials"><a class="social-btn" href="#">𝕏</a><a class="social-btn" href="#">◉</a></div>
+    <span>© 2025 ورق – WARAQ. جميع الحقوق محفوظة.</span>
+    <div class="footer-socials">
+      <a class="social-btn" href="#" aria-label="تويتر">𝕏</a>
+      <a class="social-btn" href="#" aria-label="لينكدإن">in</a>
+      <a class="social-btn" href="#" aria-label="يوتيوب">▶</a>
+      <a class="social-btn" href="#" aria-label="إنستغرام">◉</a>
+    </div>
   </div>
 </footer>
 
