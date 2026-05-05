@@ -393,6 +393,42 @@ nav {
 }
 
 /* ══════════════════════════════════════════
+   COMPETITION popup
+   ══════════════════════════════════════════ */
+
+.comp-popup-overlay {
+  position: fixed; inset: 0; z-index: 1100;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s;
+}
+.comp-popup-overlay.open { opacity: 1; pointer-events: all; }
+.comp-popup {
+  background: var(--dark2);
+  border: 1px solid rgba(255,209,0,0.15);
+  border-radius: 16px;
+  width: 100%; max-width: 860px;
+  max-height: 90vh; overflow-y: auto;
+  position: relative;
+  transform: scale(0.95) translateY(20px);
+  transition: transform 0.4s;
+  scrollbar-width: thin;
+}
+.comp-popup-overlay.open .comp-popup { transform: scale(1) translateY(0); }
+.comp-popup-close {
+  position: absolute; top: 14px; left: 14px; z-index: 10;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--white); font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.comp-popup-close:hover { background: var(--yellow-glow); border-color: var(--yellow); color: var(--yellow); }
+
+/* ══════════════════════════════════════════
    SECTION COMMON
    ══════════════════════════════════════════ */
 section { padding: 80px 60px; }

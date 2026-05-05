@@ -254,6 +254,23 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
 });
 
+function closeCompPopup(e) {
+  if (e === true || e.target === document.getElementById('comp-popup-overlay')) {
+    document.getElementById('comp-popup-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+    sessionStorage.setItem('comp-popup-seen', '1');
+  }
+}
+
+// Show on load — only once per session
+document.addEventListener('DOMContentLoaded', () => {
+  if (!sessionStorage.getItem('comp-popup-seen')) {
+    setTimeout(() => {
+      document.getElementById('comp-popup-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }, 800);
+  }
+});
 
 /* ─── MOBILE NAV ─── */
 function initMobileNav() {
